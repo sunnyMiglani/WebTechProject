@@ -22,7 +22,7 @@ var verbose = true;
 // Start the server:
 
 var http = require("http");
-var fs = require("fs");
+var fs = require("fs"); // fs = file system
 var OK = 200,
     NotFound = 404,
     BadType = 415,
@@ -36,7 +36,7 @@ function start() {
     types = defineTypes();
     banned = [];
     banUpperCase("./public/", "");
-    var service = http.createServer(handle);
+    var service = http.createServer(handle); // handle is the right side of the url.
     service.listen(port, "localhost");
     var address = "http://localhost";
     if (port != 80) address = address + ":" + port;
