@@ -23,6 +23,15 @@
 
 
 Beyond this is maybe:
+
 8. Integrate multiple households.
 9. Bitcoin mining 
 10. Sell adverts to dominoes  
+
+
+## Technology:
+
+1. Logins (with Hashing for Passwords)
+2. Databases to handle everything (PostgreSQL)
+3. Cookies
+
