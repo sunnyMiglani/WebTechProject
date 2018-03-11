@@ -1,5 +1,10 @@
+
 module.exports = function(app){
-  app.get('/', function(req, res){
-    res.send('Hello World!')
-  })
-}
+
+    const publicPath = '../Public/';
+
+
+    app.get('/', function(req, res){
+        res.sendFile(publicPath + 'home.html');
+    })
+};
