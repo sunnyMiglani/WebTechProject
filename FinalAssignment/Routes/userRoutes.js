@@ -1,9 +1,10 @@
 
 const publicRes = __dirname + '/../Public/Resources/';
+const publicPath = __dirname + '/../Public/';
 
 module.exports = function(app){
     var path = require('path');
-    const publicPath = __dirname + '/../Public/';
+    
 
 
     app.get('/', function(req, res){
