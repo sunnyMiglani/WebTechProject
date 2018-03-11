@@ -1,10 +1,12 @@
 
+var path = require('path');
 module.exports = function(app){
 
-    const publicPath = '../Public/';
+    const publicPath = __dirname + '/../Public/';
 
 
     app.get('/', function(req, res){
-        res.sendFile(publicPath + 'home.html');
+        console.log(__dirname);
+        res.sendFile(path.resolve(publicPath + 'home.html'));
     })
 };
