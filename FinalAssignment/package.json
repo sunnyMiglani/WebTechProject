@@ -1,0 +1,15 @@
+{
+  "name": "finalassignment",
+  "version": "1.0.0",
+  "description": "Webtech module UoB year 3 2017-2018.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nathan Doorly, Sunny Miglani",
+  "license": "ISC"
+}
