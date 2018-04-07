@@ -1,4 +1,4 @@
-
+"use strict"
 const publicRes = __dirname + '/../Public/Resources/';
 const publicPath = __dirname + '/../Public/';
 

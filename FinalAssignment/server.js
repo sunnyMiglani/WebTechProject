@@ -1,3 +1,4 @@
+"use strict"
 const configureExpress = require('./Configure/express.js');
 const app = configureExpress();
 
