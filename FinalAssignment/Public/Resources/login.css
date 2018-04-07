@@ -3,6 +3,24 @@ form {
     border: 3px solid #f1f1f1;
 }
 
+section.left,section.right
+{
+    width:44%; 
+    text-align: justify;
+}
+
+.left
+{ 
+    float: left; 
+    margin: 0 1% 0 2%;
+}
+
+.right
+{
+    float: right; 
+    margin:0 2% 0 1%;
+}
+
 /* Full-width inputs */
 input[type=text], input[type=password] {
     width: 100%;
@@ -15,7 +33,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
+    background-color: rgb(184, 150, 39);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -44,7 +62,7 @@ button:hover {
 
 /* Avatar image */
 img.avatar {
-    width: 40%;
+    width: 10%;
     border-radius: 50%;
 }
 
@@ -55,7 +73,7 @@ img.avatar {
 
 /* The "Forgot password" text */
 span.psw {
-    float: right;
+    text-align: left;
     padding-top: 16px;
 }
 
