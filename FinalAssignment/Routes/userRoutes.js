@@ -13,9 +13,22 @@ module.exports = function(app){
         res.sendFile(path.resolve(publicPath + 'page2.html'));
     });
 
+    app.get('/login', function(req, res){
+        res.sendFile(path.resolve(publicPath + 'login.html'));
+    });
+
     //css files
     app.get('/home.css', function(req, res) {
         res.sendFile(path.resolve(publicRes + 'home.css'));
+    });
+
+    app.get('/login.css', function(req, res) {
+        res.sendFile(path.resolve(publicRes + 'login.css'));
+    });
+
+    // image files
+    app.get('avatar.png', function(req, res) {
+        res.sendFile(path.resolve(publicRes + 'images/avatar.png'));
     });
 
     //js files
