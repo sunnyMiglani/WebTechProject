@@ -1,15 +1,16 @@
 {
-  "name": "finalassignment",
+  "name": "final_assignment",
   "version": "1.0.0",
-  "description": "Webtech module UoB year 3 2017-2018.",
-  "main": "index.js",
+  "description": "ass",
+  "main": "server.js",
   "dependencies": {
-    "express": "^4.16.2"
+    "sqlite3": "^4.0.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "Nathan Doorly, Sunny Miglani",
+  "author": "",
   "license": "ISC"
 }

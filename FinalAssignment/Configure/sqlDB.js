@@ -5,21 +5,21 @@ class sqlDB {
 
     constructor(dbLocation) {
         this.dbLocation = dbLocation;
-        this.db = this.createDB();
     }
 
-    createDB() {
+    openDB() {
         const db = new sqlite3.Database(this.dbLocation, (err) => {
             if (err) {
                 return console.error(err.message);
             }
-            console.log('Connected to the in-memory SQlite database.');
+            console.log('Connected to SQlite database.');
+
         });
-        return db;
+        return db
     };
 
-    closeDB() {
-        this.db.close((err) => {
+    closeDB(db) {
+        db.close((err) => {
             if (err) {
                 return console.error(err.message);
             }
@@ -27,7 +27,11 @@ class sqlDB {
         });
     }
 
-
+    insertTable(tableName) {
+        const db = this.openDB();
+        db.run('CREATE TABLE ' + tableName + ' (name text)');
+        this.closeDB(db);
+    }
 
 
 
