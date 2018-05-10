@@ -35,3 +35,5 @@ Beyond this is maybe:
 2. Databases to handle everything (PostgreSQL)
 3. Cookies
 
+--use this for https
+https://medium.com/@nileshsingh/everything-about-creating-an-https-server-using-node-js-2fc5c48a8d4e

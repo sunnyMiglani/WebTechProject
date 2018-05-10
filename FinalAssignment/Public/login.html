@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <link href="login.css" rel="stylesheet" type="text/css" />
-<form action="/signin" method="POST">
-    <div class="imgcontainer">
-        <img src="/avatar.png" alt="Avatar" class="avatar">
-    </div>
 
-    <section class=" container left">
+
+<div class="imgcontainer">
+    <img src="/avatar.png" alt="Avatar" class="avatar">
+</div>
+
+
+<section class=" container left">
+    <form action="/signin" method="POST">
         <label for="uname"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="uname" required>
 
@@ -20,21 +23,21 @@
         <div class="container" style="background-color:#f1f1f1">
             <span class="psw">Forgot <a href="page2">password?</a></span>
         </div>
-    </section>
-</form>
-
-<form action="/signup" method="POST"></form>
-<section class="container right">
-    <label for="uname"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <label for="psw"><b>Re-enter-Password</b></label>
-    <input type="password" placeholder="Enter Password" name="repsw" required>
-
-    <button type="submit">Signup</button>
-    <label>
+    </form>
 </section>
-</form>
+
+<section class="container right">
+    <form action="/signup" method="POST">
+        <label for="uname"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="repsw"><b>Re-enter-Password</b></label>
+        <input type="password" placeholder="Enter Password" name="repsw" required>
+
+        <button type="submit" value="Submit">Signup</button>
+        <label>
+    </form>
+</section>

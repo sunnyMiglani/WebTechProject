@@ -40,17 +40,17 @@ module.exports = function(app, db) {
         res.sendFile(path.resolve(publicRes + 'home.js'));
     });
 
-    ////////////////////////// Database requests //////////////////////////
+    ////////////////////////// Database/login requests //////////////////////////
     app.post('/signup', function(req, res) {
-        var user_id = req.body.id;
+        var uname = req.body.uname;
         var token = req.body.token;
         var geo = req.body.geo;
-        console.log(user_id + " " + token + " " + geo);
+        console.log(uname + " " + token + " " + geo);
         res.send("signed up for site");
     })
 
     app.post('/signin', function(req, res) {
-        var user_id = req.body.id;
+        var user_id = req.body.uname;
         var token = req.body.token;
         var geo = req.body.geo;
         console.log(user_id + " " + token + " " + geo);
