@@ -13,7 +13,6 @@ class sqlDB {
                 return console.error(err.message);
             }
             console.log('Connected to SQlite database.');
-
         });
         return db
     };
@@ -32,9 +31,6 @@ class sqlDB {
         db.run('CREATE TABLE ' + tableName + ' (name text)');
         this.closeDB(db);
     }
-
-
-
 }
 
 module.exports = sqlDB;

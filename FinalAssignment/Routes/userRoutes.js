@@ -2,8 +2,12 @@
 const publicRes = __dirname + '/../Public/Resources/';
 const publicPath = __dirname + '/../Public/';
 
-module.exports = function(app) {
+module.exports = function(app, db) {
     var path = require('path');
+    var bodyParser = require('body-parser');
+    app.use(bodyParser.json()); // support json encoded bodies
+    //app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
     /////////////////////////// html files ////////////////////////////////
     app.get('/', function(req, res) {
         res.sendFile(path.resolve(publicPath + 'home.html'));
@@ -17,7 +21,7 @@ module.exports = function(app) {
         res.sendFile(path.resolve(publicPath + 'login.html'));
     });
 
-    ////////////////////////// css files ////////////////////////////////
+    ////////////////////////// css files //////////////////////////////////
     app.get('/home.css', function(req, res) {
         res.sendFile(path.resolve(publicRes + 'home.css'));
     });
@@ -26,7 +30,7 @@ module.exports = function(app) {
         res.sendFile(path.resolve(publicRes + 'login.css'));
     });
 
-    /////////////////////////// image files ////////////////////////////////
+    /////////////////////////// image files ///////////////////////////////
     app.get('avatar.png', function(req, res) {
         res.sendFile(path.resolve(publicRes + 'images/avatar.png'));
     });
@@ -35,4 +39,21 @@ module.exports = function(app) {
     app.get('/Resources/home.js', function(req, res) {
         res.sendFile(path.resolve(publicRes + 'home.js'));
     });
+
+    ////////////////////////// Database requests //////////////////////////
+    app.post('/signup', function(req, res) {
+        var user_id = req.body.id;
+        var token = req.body.token;
+        var geo = req.body.geo;
+        console.log(user_id + " " + token + " " + geo);
+        res.send("signed up for site");
+    })
+
+    app.post('/signin', function(req, res) {
+        var user_id = req.body.id;
+        var token = req.body.token;
+        var geo = req.body.geo;
+        console.log(user_id + " " + token + " " + geo);
+        res.send("signed in to site");
+    })
 };

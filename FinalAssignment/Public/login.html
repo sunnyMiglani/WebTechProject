@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
-<link href="login.css" rel="stylesheet" type="text/css"/>
-<form action="action_page.php">
-    <div class="imgcontainer">
-      <img src="/avatar.png" alt="Avatar" class="avatar">
-    </div>
-  
-    <section class=" container left">
-      <label for="uname"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="uname" required>
-  
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-  
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-        <div class="container" style="background-color:#f1f1f1">
+<link href="login.css" rel="stylesheet" type="text/css" />
+<form action="/signin" method="POST">
+    <!-- <div class="imgcontainer">
+        <img src="/avatar.png" alt="Avatar" class="avatar">
+    </div> -->
 
+    <section class=" container left">
+        <label for="uname"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit" value="Submit">Login</button>
+        <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+        <div class="container" style="background-color:#f1f1f1">
             <span class="psw">Forgot <a href="page2">password?</a></span>
         </div>
     </section>
-  
-    <section class="container right">
-        <label for="uname"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="uname" required>
-    
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-    
-        <label for="psw"><b>Re-enter-Password</b></label>
-        <input type="password" placeholder="Enter Password" name="repsw" required>
-    
-        <button type="submit">Signup</button>
-        <label>
-    </section>
+</form>
 
+<form action="/signup" method="POST"></form>
+<section class="container right">
+    <label for="uname"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="uname" required>
 
-  </form>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw"><b>Re-enter-Password</b></label>
+    <input type="password" placeholder="Enter Password" name="repsw" required>
+
+    <button type="submit">Signup</button>
+    <label>
+</section>
+</form>
