@@ -49,20 +49,30 @@ module.exports = function(app, db) {
         if (!req.body) {
             res.sendStatus(400);
         }
-        var uname = req.body.uname;
-        var psw = req.body.psw;
-        var repsw = req.body.
-        console.log(uname);
-        res.send("signed up for site");
-    })
+        else {
+            var uname = req.body.uname;
+            var psw = req.body.psw;
+            var repsw = req.body.repsw;
+           
+            db.addUser('users', uname, psw);
+            res.send("Added user to site");
+        }
+    });
 
     app.post('/signin', function(req, res) {
         if (!req.body) {
             res.sendStatus(400);
         }
+        //post request username and password
         var uname = req.body.uname;
         var psw = req.body.psw;
-        console.log(uname);
-        res.send("signed in to site");
+        db.findUser(uname, function(returnedPass) {
+            if(returnedPass === psw) {
+                res.send("signed in to site");
+            }
+            else {
+                res.sendStatus(400);
+            }
+        });
     })
 };
