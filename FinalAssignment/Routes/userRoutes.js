@@ -2,11 +2,15 @@
 const publicRes = __dirname + '/../Public/Resources/';
 const publicPath = __dirname + '/../Public/';
 
+var path = require('path');
+var bodyParser = require('body-parser');
+
+
 module.exports = function(app, db) {
-    var path = require('path');
-    var bodyParser = require('body-parser');
+
     app.use(bodyParser.json()); // support json encoded bodies
-    //app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+    app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
+
 
     /////////////////////////// html files ////////////////////////////////
     app.get('/', function(req, res) {
@@ -42,18 +46,23 @@ module.exports = function(app, db) {
 
     ////////////////////////// Database/login requests //////////////////////////
     app.post('/signup', function(req, res) {
+        if (!req.body) {
+            res.sendStatus(400);
+        }
         var uname = req.body.uname;
-        var token = req.body.token;
-        var geo = req.body.geo;
-        console.log(uname + " " + token + " " + geo);
+        var psw = req.body.psw;
+        var repsw = req.body.
+        console.log(uname);
         res.send("signed up for site");
     })
 
     app.post('/signin', function(req, res) {
-        var user_id = req.body.uname;
-        var token = req.body.token;
-        var geo = req.body.geo;
-        console.log(user_id + " " + token + " " + geo);
+        if (!req.body) {
+            res.sendStatus(400);
+        }
+        var uname = req.body.uname;
+        var psw = req.body.psw;
+        console.log(uname);
         res.send("signed in to site");
     })
 };

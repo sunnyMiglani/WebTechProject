@@ -28,7 +28,14 @@ class sqlDB {
 
     insertTable(tableName) {
         const db = this.openDB();
-        db.run('CREATE TABLE ' + tableName + ' (name text)');
+        db.get("SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName, function(error, row) {
+            if (row !== undefined) {
+                console.log("Table: " + tableName + " already exists"); 
+            }
+            else {
+                db.run('CREATE TABLE ' + tableName + ' (name text)');
+            }
+        });
         this.closeDB(db);
     }
 }

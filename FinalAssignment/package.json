@@ -4,6 +4,7 @@
   "description": "ass",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "sqlite3": "^4.0.0"
   },
   "devDependencies": {},
