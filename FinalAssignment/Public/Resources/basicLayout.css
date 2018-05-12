@@ -1,9 +1,17 @@
+head {
+    background-color: #264653;
+}
+
+body {
+    background-color: #264653;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #2a9d8f;
 }
 
 li {
@@ -19,10 +27,10 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: rgb(70, 70, 70);
+    opacity: 0.8;
 }
 
 
 .active {
-    background-color: rgb(184, 150, 39);
+    background-color: #e76f51;
 }

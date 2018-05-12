@@ -38,22 +38,7 @@ class sqlDB {
         this.closeDB(db);
     }
 
-    //Shouldn't need this in final version
-    // insertTable(tableName) {
-    //     const db = this.openDB();
-    //     db.get("SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName, function(error, row) {
-    //         if (row !== undefined) {
-    //             console.log("Table: " + tableName + " already exists"); 
-    //         }
-    //         else {
-    //             db.run('CREATE TABLE ' + tableName + ' (name text)');
-    //         }
-    //     });
-    //     this.closeDB(db);
-    // }
-
-    //TODO: check if user already exists in database
-    addUser(tableName, name, psw) {
+    addUser(tableName, name, psw, callback) {
         var db = this.openDB();
         db.run('INSERT INTO users(Name, Pass) VALUES(?, ?)', [name, psw], function(err) {
             if (err) {
@@ -61,6 +46,9 @@ class sqlDB {
             }
             // get the last insert id
             console.log(`A row has been inserted with rowid ${this.lastID}`);
+            if(callback) {
+                callback();
+            }
         });
         this.closeDB(db);
     }
@@ -76,7 +64,7 @@ class sqlDB {
                 if(rows[0] !== undefined) {
                     console.log(`${rows[0].name} ${rows[0].pass}`);
                     if(callback) {
-                        callback(rows[0].pass);
+                        callback(rows[0]);
                     }
                 }
                 else {

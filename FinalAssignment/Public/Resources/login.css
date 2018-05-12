@@ -1,13 +1,15 @@
 /* Bordered form */
 
 form {
-    border: 3px solid #f1f1f1;
+    border: 3px solid;
+    border-color: #264653;
 }
 
 section.left,section.right
 {
     width:44%; 
     text-align: justify;
+    background-color: #264653;
 }
 
 .left
@@ -34,7 +36,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: rgb(184, 150, 39);
+    background-color: #e76f51;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;

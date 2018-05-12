@@ -8,12 +8,29 @@ var bodyParser = require('body-parser');
 
 module.exports = function(app, db) {
 
+    /////////////////////////// middleware ////////////////////////////////
+
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
+    
 
+    app.use((req, res, next) => {
+        if (req.cookies.user_sid && !req.session.user) {
+            res.clearCookie('user_sid');        
+        }
+        next();
+    });
+
+    var sessionChecker = (req, res, next) => {
+        if (req.session.user && req.cookies.user_sid) {
+            res.redirect('/dashboard');
+        } else {
+            next();
+        }
+    };
 
     /////////////////////////// html files ////////////////////////////////
-    app.get('/', function(req, res) {
+    app.get('/', sessionChecker, function(req, res) {
         res.sendFile(path.resolve(publicPath + 'home.html'));
     });
 
@@ -21,8 +38,20 @@ module.exports = function(app, db) {
         res.sendFile(path.resolve(publicPath + 'page2.html'));
     });
 
-    app.get('/login', function(req, res) {
+    app.get('/login', sessionChecker, function(req, res) {
         res.sendFile(path.resolve(publicPath + 'login.html'));
+    });
+    
+    app.get('/dashboard', (req, res) => {
+        console.log(req.session.user);
+        console.log(req.session.user);
+        if (req.session.user && req.cookies.user_sid) {
+            console.log("Dashboard: Is a session user");
+            res.sendFile(path.resolve(publicPath + 'dashboard.html'));
+        } else {
+            console.log("Dashboard: Not a session user");
+            res.redirect('/login');
+        }
     });
 
     ////////////////////////// css files //////////////////////////////////
@@ -48,22 +77,25 @@ module.exports = function(app, db) {
         res.sendFile(path.resolve(publicRes + 'home.js'));
     });
 
-    ////////////////////////// Database/login requests //////////////////////////
+    ////////////////////////// Database/login requests ////////////////////
     app.post('/signup', function(req, res) {
         if (!req.body) {
             res.sendStatus(400);
         }
         else {
-            var uname = req.body.uname;
-            var psw = req.body.psw;
+            var name = req.body.uname;
+            var pass = req.body.psw;
             var repsw = req.body.repsw;
-            db.findUser(uname, function(returnedPass) {
-                if(returnedPass !== undefined) {
-                    res.send("User already exists");
+            db.findUser(name, function(returnedRow) {
+                if(returnedRow !== undefined) {
+                    res.redirect('/login');
                 }
                 else {
-                    db.addUser('users', uname, psw);
-                    res.send("Added user to site");
+                    db.addUser('users', name, pass, function() {
+                        console.log("Signup: going to dashboard");
+                        req.session.user = {name, pass};
+                        res.redirect('/dashboard');
+                    });
                 }
             });
         }
@@ -77,14 +109,21 @@ module.exports = function(app, db) {
         else {
             var uname = req.body.uname;
             var psw = req.body.psw;
-            db.findUser(uname, function(returnedPass) {
-            if(returnedPass === psw) {
-                res.send("signed in to site");
-            }
-            else {
-                res.sendStatus(400);
-            }
-        });
+            db.findUser(uname, function(returnedRow) {
+                if(returnedRow.pass === psw) {
+                    console.log("User logged in");
+                    req.session.user = returnedRow;
+                    res.redirect('/dashboard');
+                }
+                else {
+                    res.sendStatus(400);
+                }
+            });
         }
+    });
+
+    ////////////////////////// Error handling ////////////////////////
+    app.use(function (req, res, next) {
+        res.status(404).send("Sorry that page doesn\'t exist")
     })
 };
