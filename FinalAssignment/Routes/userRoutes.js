@@ -26,6 +26,10 @@ module.exports = function(app, db) {
     });
 
     ////////////////////////// css files //////////////////////////////////
+    app.get('/basicLayout.css', function(req, res) {
+        res.sendFile(path.resolve(publicRes + 'basicLayout.css'));
+    });
+    
     app.get('/home.css', function(req, res) {
         res.sendFile(path.resolve(publicRes + 'home.css'));
     });
@@ -53,9 +57,15 @@ module.exports = function(app, db) {
             var uname = req.body.uname;
             var psw = req.body.psw;
             var repsw = req.body.repsw;
-           
-            db.addUser('users', uname, psw);
-            res.send("Added user to site");
+            db.findUser(uname, function(returnedPass) {
+                if(returnedPass !== undefined) {
+                    res.send("User already exists");
+                }
+                else {
+                    db.addUser('users', uname, psw);
+                    res.send("Added user to site");
+                }
+            });
         }
     });
 
@@ -64,9 +74,10 @@ module.exports = function(app, db) {
             res.sendStatus(400);
         }
         //post request username and password
-        var uname = req.body.uname;
-        var psw = req.body.psw;
-        db.findUser(uname, function(returnedPass) {
+        else {
+            var uname = req.body.uname;
+            var psw = req.body.psw;
+            db.findUser(uname, function(returnedPass) {
             if(returnedPass === psw) {
                 res.send("signed in to site");
             }
@@ -74,5 +85,6 @@ module.exports = function(app, db) {
                 res.sendStatus(400);
             }
         });
+        }
     })
 };

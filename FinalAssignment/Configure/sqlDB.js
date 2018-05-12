@@ -72,16 +72,18 @@ class sqlDB {
             if(err) {
                 console.log(err.message);
             }
-             else {
+            else {
                 if(rows[0] !== undefined) {
                     console.log(`${rows[0].name} ${rows[0].pass}`);
                     if(callback) {
                         callback(rows[0].pass);
                     }
                 }
-                //TODO: return error if user not found- possibly use callback here
                 else {
                     console.log("User not found");
+                    if(callback) {
+                        callback(undefined);
+                    }
                 }
             }
         });
