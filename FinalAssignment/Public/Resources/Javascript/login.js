@@ -2,6 +2,7 @@
 
 window.onload = function(){
 var firstPass = document.getElementById("regPsw");
+var secondPass = document.getElementById("regPswTwo")
 
 var number = document.getElementById("number");
 var length = document.getElementById("length");
@@ -10,15 +11,27 @@ var both = document.getElementById("both");
 if(firstPass === null || both === null || length === null || number === null ){
   console.log("CANNOT FIND THE CORRECT ELEMENT IN LOGIN.JS");
 }
-firstPass.onfocus = function(){
-    document.getElementById("requirements").style.display = "block";
+
+
+secondPass.onfocus = displayRequirements;
+firstPass.onfocus = displayRequirements;
+secondPass.onblur = hideRequirements;
+firstPass.onblur = hideRequirements;
+
+
+firstPass.onkeyup = validate;
+secondPass.onkeyup = validate;
+
+
+function displayRequirements(){
+  document.getElementById("requirements").style.display = "block";
 };
 
-firstPass.onblur = function() {
+function hideRequirements() {
     document.getElementById("requirements").style.display = "none";
 };
 
-firstPass.onkeyup = function() {
+function validate() {
     // Validate numbers
     var numbers = /[0-9]/g;
     if(firstPass.value.match(numbers)) {  
@@ -36,7 +49,7 @@ firstPass.onkeyup = function() {
       length.classList.remove("valid");
       length.classList.add("invalid");
     }
-  if(secondPass.value === firstPass.value){
+  if(secondPass.value === firstPass.value && secondPass.value.length > 0 ){
       both.classList.remove("invalid");
       both.classList.add("valid");
     } else {
@@ -45,3 +58,4 @@ firstPass.onkeyup = function() {
     }
   }
 }
+
