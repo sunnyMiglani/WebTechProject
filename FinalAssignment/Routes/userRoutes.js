@@ -89,6 +89,11 @@ module.exports = function(app, db) {
         res.sendFile(path.resolve(jsPath + 'home.js'));
     });
 
+    app.get('/login.js', function(req, res) {
+        res.sendFile(path.resolve(jsPath + 'login.js'));
+    });
+
+
     ////////////////////////// Database/login requests ////////////////////
     app.post('/signup', function(req, res) {
         if (!req.body) {

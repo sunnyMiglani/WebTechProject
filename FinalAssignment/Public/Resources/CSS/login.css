@@ -7,20 +7,20 @@ form {
 
 section.left,section.right
 {
-    width:44%; 
+    width:44%;
     text-align: justify;
     background-color: #264653;
 }
 
 .left
-{ 
-    float: left; 
+{
+    float: left;
     margin: 0 1% 0 2%;
 }
 
 .right
 {
-    float: right; 
+    float: right;
     margin:0 2% 0 1%;
 }
 
@@ -98,8 +98,45 @@ div {
 }
 .lname {
     float: right;
-    
+
     width: 49%;
+}
+
+/* Requirements for the password */
+#requirements {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#requirements p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
 }
 
 /* Change styles for span and cancel button on extra small screens */
