@@ -1,6 +1,8 @@
 "use strict"
 const publicRes = __dirname + '/../Public/Resources/';
 const publicPath = __dirname + '/../Public/';
+const cssPath = __dirname + '/../Public/Resources/CSS/';
+const jsPath = __dirname + '/../Public/Resources/Javascript/';
 
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -11,12 +13,12 @@ module.exports = function(app, db) {
     /////////////////////////// middleware ////////////////////////////////
 
     app.use(bodyParser.json()); // support json encoded bodies
-    app.use(bodyParser.urlencoded({ extended: false })); 
-    
+    app.use(bodyParser.urlencoded({ extended: false }));
+
 
     app.use(function(req, res, next) {
         if (req.cookies.user_sid && !req.session.user) {
-            res.clearCookie('user_sid');        
+            res.clearCookie('user_sid');
         }
         next();
     });
@@ -41,7 +43,7 @@ module.exports = function(app, db) {
     app.get('/login', sessionChecker, function(req, res) {
         res.sendFile(path.resolve(publicPath + 'login.html'));
     });
-    
+
     app.get('/dashboard', function(req, res) {
         console.log(req.session.user);
         console.log(req.session.user_sid);
@@ -66,15 +68,15 @@ module.exports = function(app, db) {
 
     ////////////////////////// css files //////////////////////////////////
     app.get('/basicLayout.css', function(req, res) {
-        res.sendFile(path.resolve(publicRes + 'basicLayout.css'));
+        res.sendFile(path.resolve(cssPath + 'basicLayout.css'));
     });
-    
+
     app.get('/home.css', function(req, res) {
-        res.sendFile(path.resolve(publicRes + 'home.css'));
+        res.sendFile(path.resolve(cssPath + 'home.css'));
     });
 
     app.get('/login.css', function(req, res) {
-        res.sendFile(path.resolve(publicRes + 'login.css'));
+        res.sendFile(path.resolve(cssPath + 'login.css'));
     });
 
     /////////////////////////// image files ///////////////////////////////
@@ -84,7 +86,7 @@ module.exports = function(app, db) {
 
     ///////////////////////////// js files ////////////////////////////////
     app.get('/Resources/home.js', function(req, res) {
-        res.sendFile(path.resolve(publicRes + 'home.js'));
+        res.sendFile(path.resolve(jsPath + 'home.js'));
     });
 
     ////////////////////////// Database/login requests ////////////////////

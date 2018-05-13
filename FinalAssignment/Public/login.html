@@ -13,7 +13,7 @@
     <li><a href="/page2">Page2</a></li>
     <li><a href="">Contact</a></li>
     <li style="float:right"><a class="active" href="/login">Signup/Login</a></li>
-</ul> 
+</ul>
 
 
 <section class="container left">
@@ -22,7 +22,7 @@
         <input type="text" placeholder="Enter Email" name="uname" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="Enter Password" name="psw" pattern="(?=.*\d).{8,}" required>
 
         <button type="submit" value="Submit">Login</button>
         <label>
@@ -39,12 +39,12 @@
         <div class="realNames">
             <div class="fname">
                 <label for="fname"><b>First Name</b></label>
-                <input type="text" placeholder="Enter First name" name="fname" required>        
+                <input type="text" placeholder="Enter First name" name="fname" required>
             </div>
             <div class="lname">
                 <label for="lname"><b>Last Name</b></label>
                 <input type="text" placeholder="Enter First name" name="lname" required>
-              
+
             </div>
         </div>
         <label for="uname"><b>Email</b></label>
@@ -56,7 +56,7 @@
             <label for="repsw"><b>Re-enter Password</b></label>
             <input type="password" placeholder="Enter Password" name="repsw" required>
         </div>
-        
+
         <button type="submit" value="Submit">Signup</button>
         <label>
     </form>
