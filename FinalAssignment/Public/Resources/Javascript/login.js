@@ -74,6 +74,8 @@ function validate() {
     }  
   if(numbCorrect === true && lengthCorrect === true && bothCorrect === true){
       subButton.style.visibility = "visible";
+    } else{
+      subButton.style.visibility = "hidden";
     }
   }
 }
