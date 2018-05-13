@@ -105,8 +105,8 @@ div {
 /* Requirements for the password */
 #requirements {
     display:none;
-    background: #f1f1f1;
-    color: #000;
+    background: #264653;
+    color: rgb(252, 252, 252);
     position: relative;
     padding: 20px;
     margin-top: 10px;
