@@ -36,15 +36,27 @@
 
 <section class="container right">
     <form action="/signup" method="POST">
+        <div class="realNames">
+            <div class="fname">
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" placeholder="Enter First name" name="fname" required>        
+            </div>
+            <div class="lname">
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter First name" name="lname" required>
+              
+            </div>
+        </div>
         <label for="uname"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="uname" required>
 
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
-
-        <label for="repsw"><b>Re-enter-Password</b></label>
-        <input type="password" placeholder="Enter Password" name="repsw" required>
-
+        <div>
+            <label for="repsw"><b>Re-enter Password</b></label>
+            <input type="password" placeholder="Enter Password" name="repsw" required>
+        </div>
+        
         <button type="submit" value="Submit">Signup</button>
         <label>
     </form>

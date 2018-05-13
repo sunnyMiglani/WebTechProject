@@ -34,6 +34,10 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
+b {
+    color: white;
+}
+
 /* Set a style for all buttons */
 button {
     background-color: #e76f51;
@@ -78,6 +82,24 @@ img.avatar {
 span.psw {
     text-align: left;
     padding-top: 16px;
+}
+
+div {
+    text-align: left;
+}
+
+.realNames {
+    width: 100%;
+}
+
+.fname {
+    float: left;
+    width: 49%;
+}
+.lname {
+    float: right;
+    
+    width: 49%;
 }
 
 /* Change styles for span and cancel button on extra small screens */

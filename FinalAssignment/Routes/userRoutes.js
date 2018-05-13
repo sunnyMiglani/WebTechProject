@@ -11,17 +11,17 @@ module.exports = function(app, db) {
     /////////////////////////// middleware ////////////////////////////////
 
     app.use(bodyParser.json()); // support json encoded bodies
-    app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
+    app.use(bodyParser.urlencoded({ extended: false })); 
     
 
-    app.use((req, res, next) => {
+    app.use(function(req, res, next) {
         if (req.cookies.user_sid && !req.session.user) {
             res.clearCookie('user_sid');        
         }
         next();
     });
 
-    var sessionChecker = (req, res, next) => {
+    var sessionChecker = function(req, res, next) {
         if (req.session.user && req.cookies.user_sid) {
             res.redirect('/dashboard');
         } else {
@@ -42,14 +42,24 @@ module.exports = function(app, db) {
         res.sendFile(path.resolve(publicPath + 'login.html'));
     });
     
-    app.get('/dashboard', (req, res) => {
+    app.get('/dashboard', function(req, res) {
         console.log(req.session.user);
-        console.log(req.session.user);
+        console.log(req.session.user_sid);
         if (req.session.user && req.cookies.user_sid) {
             console.log("Dashboard: Is a session user");
             res.sendFile(path.resolve(publicPath + 'dashboard.html'));
         } else {
             console.log("Dashboard: Not a session user");
+            res.redirect('/login');
+        }
+    });
+
+    app.get('/account', function(req, res) {
+        if (req.session.user && req.cookies.user_sid) {
+            console.log("Account: Is a session user");
+            res.sendFile(path.resolve(publicPath + 'account.html'));
+        } else {
+            console.log("Account: Not a session user");
             res.redirect('/login');
         }
     });
@@ -83,6 +93,7 @@ module.exports = function(app, db) {
             res.sendStatus(400);
         }
         else {
+            //TODO: check pass' are same here or on client
             var name = req.body.uname;
             var pass = req.body.psw;
             var repsw = req.body.repsw;
@@ -124,6 +135,6 @@ module.exports = function(app, db) {
 
     ////////////////////////// Error handling ////////////////////////
     app.use(function (req, res, next) {
-        res.status(404).send("Sorry that page doesn\'t exist")
+        res.status(404).send("Sorry that page doesn\'t exist");
     })
 };
