@@ -2,7 +2,7 @@
 
 const sqlDB = require('./Configure/sqlDB.js');
 //build new database at file loaction
-const db = new sqlDB('./DB/testDB.db');
+const db = new sqlDB('./DB/user_data.db');
 
 //get express config file and create app
 const configureExpress = require('./Configure/express.js');
