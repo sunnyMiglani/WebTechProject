@@ -50,8 +50,8 @@
             </div>
         </div>
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
-
+        <input type="text" id="emailEnter" placeholder="Enter Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z{2,}]" required>
+        
         <label for="psw"><b>Password</b></label>
         <input type="password" id="regPsw" placeholder="Enter Password" name="psw" pattern="(?=.*\d).{8,}" required>
         <div>
@@ -62,9 +62,10 @@
         <button type="submit" id="subButton" value="Submit">Signup</button>
 
         <div id="requirements">
-            <h3>Password must contain the following:</h3>
-            <p id="number" class="invalid">One or more <b>numbers</b></p>
-            <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            <h3>Information must match the folling</h3>
+            <p id="email" class="invalid">Validity of Email</p>
+            <p id="number" class="invalid">Password has One or more <b>numbers</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b> for password </p>
             <p id="both" class="invalid">Confirm Password</p>
         </div>
     </form>

@@ -4,6 +4,9 @@ window.onload = function() {
     var firstPass = document.getElementById("regPsw");
     var secondPass = document.getElementById("regPswTwo")
 
+    var emailEnt = document.getElementById("emailEnter");
+
+
     var number = document.getElementById("number");
     var length = document.getElementById("length");
     var both = document.getElementById("both");
@@ -24,6 +27,8 @@ window.onload = function() {
     firstPass.onfocus = displayRequirements;
     secondPass.onblur = hideRequirements;
     firstPass.onblur = hideRequirements;
+    emailEnt.onfocus = displayRequirements;
+    emailEnt.onblur = hideRequirements;
 
     firstPass.onkeyup = validate;
     secondPass.onkeyup = validate;
@@ -40,7 +45,7 @@ window.onload = function() {
     function validate() {
         // Validate numbers
         var numbers = /[0-9]/g;
-        if(firstPass.value.match(numbers)) {  
+        if(firstPass.value.match(numbers)) {
             number.classList.remove("invalid");
             number.classList.add("valid");
             numbCorrect = true;
@@ -76,10 +81,30 @@ window.onload = function() {
 
         if(numbCorrect && lengthCorrect && bothCorrect){
             subButton.style.visibility = "visible";
-        } 
+        }
         else{
             subButton.style.visibility = "hidden";
         }
     }
-}
 
+   
+    if(emailEnt === null){
+        console.log("Email entry not found!");
+    }
+
+    
+    var emailId = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z{2,}]/g;
+    emailEnt.onkeyup = function(){
+        var emailCorrect = emailEnt.value.match(emailId)
+        if( emailCorrect){
+            email.classList.remove("invalid");
+            email.classList.add("valid");
+        }
+        else{
+            console.log("Doesn't match! ");
+            email.classList.remove("valid");
+            email.classList.add("invalid");
+        }
+    }
+
+}
