@@ -67,14 +67,14 @@ window.onload = function() {
             both.classList.remove("invalid");
             both.classList.add("valid");
             bothCorrect = true;
-        } 
+        }
         else {
             both.classList.remove("valid");
             both.classList.add("invalid");
             bothCorrect = false;
         }
 
-        if(numbCorrect === true && lengthCorrect === true && bothCorrect === true){
+        if(numbCorrect && lengthCorrect && bothCorrect){
             subButton.style.visibility = "visible";
         } 
         else{

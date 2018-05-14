@@ -100,22 +100,29 @@ module.exports = function(app, db) {
             res.sendStatus(400);
         }
         else {
-            //TODO: check pass' are same here or on client
-            var name = req.body.uname;
-            var pass = req.body.psw;
+            var email = req.body.email;
+            var pass  = req.body.psw;
             var repsw = req.body.repsw;
-            db.findUser(name, function(returnedRow) {
-                if(returnedRow !== undefined) {
-                    res.redirect('/login');
-                }
-                else {
-                    db.addUser('users', name, pass, function() {
-                        console.log("Signup: going to dashboard");
-                        req.session.user = {name, pass};
-                        res.redirect('/dashboard');
-                    });
-                }
-            });
+            var fname = req.body.fname;
+            var lname = req.body.lname;
+            if(pass === repsw) {
+                db.findUser(email, function(returnedRow) {
+                    if(returnedRow !== undefined) {
+                        res.redirect('/login');
+                    }
+                    else {
+                        db.addUser('users', email, pass, fname, lname, function() {
+                            console.log("Signup: going to dashboard");
+                            req.session.user = {email, pass, fname, lname};
+                            res.redirect('/dashboard');
+                        });
+                    }
+                });
+            }
+            else {
+                console.log("Both passwords sent are not equal");
+                res.redirect('/dashboard');
+            }
         }
     });
 

@@ -33,14 +33,14 @@ class sqlDB {
         var db = this.openDB();
         db.serialize(function() {
             //look for user table in database and create if not present
-            db.run('CREATE TABLE IF NOT EXISTS users(Name TEXT NOT NULL, Pass TEXT NOT NULL)');
+            db.run('CREATE TABLE IF NOT EXISTS users(Email TEXT NOT NULL, Pass TEXT NOT NULL, Fname TEXT NOT NULL, Lname TEXT NOT NULL)');
         });
         this.closeDB(db);
     }
 
-    addUser(tableName, name, psw, callback) {
+    addUser(tableName, email, psw, Fname, Lname, callback) {
         var db = this.openDB();
-        db.run('INSERT INTO users(Name, Pass) VALUES(?, ?)', [name, psw], function(err) {
+        db.run('INSERT INTO users(Email, Pass, Fname, Lname) VALUES(?, ?, ?, ?)', [email, psw, Fname, Lname], function(err) {
             if (err) {
                 return console.log(err.message);
             }
@@ -53,10 +53,10 @@ class sqlDB {
         this.closeDB(db);
     }
 
-    findUser(uname, callback) {
+    findUser(email, callback) {
         var db = this.openDB();
-        let sqlQuery = 'SELECT Name name, Pass pass FROM users WHERE Name = ?';
-        db.all(sqlQuery, [uname], function(err, rows) {
+        let sqlQuery = 'SELECT Email email, Pass pass, Fname fname, Lname lname FROM users WHERE Email = ?';
+        db.all(sqlQuery, [email], function(err, rows) {
             if(err) {
                 console.log(err.message);
             }
