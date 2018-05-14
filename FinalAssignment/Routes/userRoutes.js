@@ -19,7 +19,7 @@ module.exports = function(app, db) {
         if(req.secure){
             next();
         } else {
-            res.redirect('https://' + "localhost:3000" + req.url); // TODO: req.headers.host
+            res.redirect('https://' + req.headers.host + ':3000' + req.url);
         }
     });
 
@@ -158,6 +158,31 @@ module.exports = function(app, db) {
                 }
             });
         }
+    });
+
+
+    app.post('/createhouse', function(req, res) {
+        if (!req.body) {
+            res.sendStatus(400);
+        }
+        var houseName = req.body.hname;
+        db.addHouseGroup(houseName, function(row) {
+            res.redirect('/dashboard');
+        });
+    });
+
+    app.post('/joinhouse', function(req, res) {
+        var houseName = req.body.hname;
+        var user = req.session.user;
+        console.log(user);
+        db.joinHouse(houseName, user, function() {
+            req.session.user = returnedRow;
+            res.redirect('/dashboard');
+        });
+    });
+
+    app.post('/joinuser', function(req, res) {
+
     });
 
     ////////////////////////// Error handling ////////////////////////

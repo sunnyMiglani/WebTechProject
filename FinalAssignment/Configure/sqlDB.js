@@ -33,21 +33,52 @@ class sqlDB {
         var db = this.openDB();
         db.serialize(function() {
             //look for user and house table in database and create if not present
-            db.run('CREATE TABLE IF NOT EXISTS HouseGroups(GroupID INTEGER PRIMARY KEY, HouseName TEXT NOT NULL)'); 
+            db.run('CREATE TABLE IF NOT EXISTS HouseGroups(GroupID INTEGER PRIMARY KEY AUTOINCREMENT, HouseName TEXT NOT NULL)'); 
             db.run('CREATE TABLE IF NOT EXISTS users(Email TEXT NOT NULL, Pass TEXT NOT NULL, Fname TEXT NOT NULL,\
                     Lname TEXT NOT NULL, HouseID INTEGER NOT NULL, FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
             
             //Add global house position if not set already
-            db.run('INSERT OR IGNORE INTO HouseGroups(GroupID, HouseName) VALUES(?, ?)', [0, 'Global']);
+            db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', ['Global']);
         });
         this.closeDB(db);
     }
 
-    addHouseGroup(groupName, id) {
+    addHouseGroup(houseName, callback) {
         var db = this.openDB();
-        db.run('INSERT OR IGNORE INTO HouseGroups(GroupID, HouseName) VALUES(?, ?)', [id, groupName]);
+        db.serialize(function() {
+            db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', [houseName]);
+            db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, row) {
+                if(err) {
+                    console.log(err.message);
+                }
+                else {
+                    if(callback) {
+                        callback(row);
+                    }
+                }
+            });
+        });
         this.closeDB(db);
     }
+
+    joinHouseGroup(houseName, userTojoin, callback) {
+        var db = this.openDB();
+            db.run('SELECT GroupID gid HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, row) {
+                if(err) {
+                    console.log(err.message);
+                }
+                db.run('UPDATE users SET HouseID= ? WHERE email = ?', [row[0], userTojoin], function(err) {
+                    if(err) {
+                        console.log(err.message);
+                    }
+                    if(callback) {
+                        callback();
+                    }
+                });
+            });
+        this.closeDB(db);
+    }
+
 
     //add user to user table
     addUser(tableName, email, psw, Fname, Lname, callback) {
