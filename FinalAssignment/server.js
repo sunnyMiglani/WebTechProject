@@ -17,6 +17,6 @@ httpsApp.listen(3000, function() {
     console.log('Example app listening on port 3000!');
 });
 
-httpApp.listen(3001, function() {
+httpApp.listen(80, function() {
     console.log('Example app listening on port 3001!');
 });
