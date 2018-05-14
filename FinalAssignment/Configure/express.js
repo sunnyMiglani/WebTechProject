@@ -26,7 +26,7 @@ module.exports = function(db) {
             //Without expires. client should delete cookie when closing web browser
             // /expires: 10000,
             //TODO: change this if we have https working
-            secure: false
+            secure: true
         }
     }));
     
