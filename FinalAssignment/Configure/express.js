@@ -1,9 +1,12 @@
 "use strict"
 var path = require('path');
 const expressConf = require("express");
+var fs = require('fs');
 var session = require('express-session');
 const express = expressConf();
 var cookieParser = require('cookie-parser');
+var httpsKey = fs.readFileSync('Encryption/private.key');
+var httpsCert = fs.readFileSync('Encryption/homiedomain.csr');
 
 module.exports = function(db) {
     const app = express;
