@@ -18,6 +18,7 @@ window.onload = function() {
     var numbCorrect = false;
     var lengthCorrect = false;
     var bothCorrect = false;
+    var emailCorrect = false;
 
     if(firstPass === null || both === null || length === null || number === null ){
         console.log("CANNOT FIND THE CORRECT ELEMENT IN LOGIN.JS");
@@ -32,6 +33,7 @@ window.onload = function() {
 
     firstPass.onkeyup = validate;
     secondPass.onkeyup = validate;
+    emailEnt.onkeyup = validate;
 
     function displayRequirements(){
         document.getElementById("requirements").style.display = "block";
@@ -78,32 +80,24 @@ window.onload = function() {
             both.classList.add("invalid");
             bothCorrect = false;
         }
+        var emailId = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z{2,}]/g;
+        if (emailEnt.value.match(emailId)) {
+            email.classList.remove("invalid");
+            email.classList.add("valid");
+            emailCorrect = true;
+        }
+        else {
+            console.log("Doesn't match!");
+            email.classList.remove("valid");
+            email.classList.add("invalid");
+            emailCorrect = false;
+        }
 
-        if(numbCorrect && lengthCorrect && bothCorrect){
+        if(numbCorrect && lengthCorrect && bothCorrect && emailCorrect){
             subButton.style.visibility = "visible";
         }
         else{
             subButton.style.visibility = "hidden";
-        }
-    }
-
-   
-    if(emailEnt === null){
-        console.log("Email entry not found!");
-    }
-
-    
-    var emailId = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z{2,}]/g;
-    emailEnt.onkeyup = function(){
-        var emailCorrect = emailEnt.value.match(emailId)
-        if( emailCorrect){
-            email.classList.remove("invalid");
-            email.classList.add("valid");
-        }
-        else{
-            console.log("Doesn't match! ");
-            email.classList.remove("valid");
-            email.classList.add("invalid");
         }
     }
 
