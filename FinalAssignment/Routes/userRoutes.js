@@ -132,16 +132,22 @@ module.exports = function(app, db) {
         }
         //post request username and password
         else {
-            var uname = req.body.uname;
+            var email = req.body.email;
             var psw = req.body.psw;
-            db.findUser(uname, function(returnedRow) {
-                if(returnedRow.pass === psw) {
+            db.findUser(email, function(returnedRow) {
+                if(returnedRow === undefined) {
+                    console.log("User not found");
+                    res.redirect('/login');
+                }
+
+                else if(returnedRow.pass === psw) {
                     console.log("User logged in");
                     req.session.user = returnedRow;
                     res.redirect('/dashboard');
                 }
                 else {
-                    res.sendStatus(400);
+                    console.log("Incorect password");
+                    res.redirect('/login');
                 }
             });
         }
