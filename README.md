@@ -35,11 +35,15 @@ Beyond this is maybe:
 2. Databases to handle everything (PostgreSQL)
 3. Cookies
 
---use this for https
-https://medium.com/@nileshsingh/everything-about-creating-an-https-server-using-node-js-2fc5c48a8d4e
+--[use this for https](
+https://medium.com/@nileshsingh/everything-about-creating-an-https-server-using-node-js-2fc5c48a8d4e)
 
---colour schemes
-https://coolors.co/browser/best/1
+-- [Use this instead... (for https)](https://contextneutral.com/story/creating-an-https-server-with-nodejs-and-express/?utm=medium)
 
---login and send to dashboard
-https://www.codementor.io/emjay/how-to-build-a-simple-session-based-authentication-system-with-nodejs-from-scratch-6vn67mcy3
+--[colour schemes](
+https://coolors.co/browser/best/1)
+
+--[login and send to dashboard](
+https://www.codementor.io/emjay/how-to-build-a-simple-session-based-authentication-system-with-nodejs-from-scratch-6vn67mcy3)
+
+-- [Made a key and cert using this](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)

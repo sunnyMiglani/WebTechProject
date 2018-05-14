@@ -1,11 +1,20 @@
 "use strict"
 var path = require('path');
 const expressConf = require("express");
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
 var session = require('express-session');
 const express = expressConf();
 var cookieParser = require('cookie-parser');
+var httpsKey = fs.readFileSync('Encryption/domain.key');
+var httpsCert = fs.readFileSync('Encryption/domain.crt');
+
+var credentials = {key: httpsKey, cert: httpsCert};
+
 
 module.exports = function(db) {
+    // var https = require('https');
     const app = express;
     app.use(cookieParser());
     app.use(session({
@@ -23,5 +32,10 @@ module.exports = function(db) {
     
     app.use(expressConf.static(__dirname + '/../Public/Resources/images'));
     require(path.resolve(__dirname + '/../Routes/userRoutes.js'))(app, db);
-    return app;
+    var httpsServer = https.createServer(credentials, app);    
+    var httpServer = http.createServer(app);
+
+    return [httpsServer, httpServer];
 };
+
+

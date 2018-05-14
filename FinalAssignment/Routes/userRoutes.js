@@ -15,6 +15,13 @@ module.exports = function(app, db) {
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: false }));
 
+    app.use(function(req,res,next){
+        if(req.secure){
+            next();
+        } else {
+            res.redirect('https://' + "localhost:3000" + req.url); // TODO: req.headers.host
+        }
+    });
 
     app.use(function(req, res, next) {
         if (req.cookies.user_sid && !req.session.user) {
