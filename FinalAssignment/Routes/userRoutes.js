@@ -33,6 +33,7 @@ module.exports = function(app, db) {
 
     var sessionChecker = function(req, res, next) {
         if (req.session.user && req.cookies.user_sid) {
+            console.log("user = " + JSON.stringify(req.session.user));
             res.redirect('/dashboard');
         } else {
             next();
@@ -146,7 +147,7 @@ module.exports = function(app, db) {
                     else {
                         db.addUser('users', email, pass, fname, lname, function() {
                             console.log("Signup: going to dashboard");
-                            req.session.user = {email, pass, fname, lname};
+                            req.session.user = {email};
                             res.redirect('/dashboard');
                         });
                     }
@@ -175,7 +176,7 @@ module.exports = function(app, db) {
                 }
                 else if(returnedRow.pass === psw) {
                     console.log("User logged in");
-                    req.session.user = returnedRow;
+                    req.session.user = {email};
                     res.redirect('/dashboard');
                 }
                 else {
@@ -217,7 +218,6 @@ module.exports = function(app, db) {
             db.findUser(email, function(row) {
                 if(row !== undefined) {
                     console.log("New row for user = " + JSON.stringify(row));
-                    req.session.user = row;
                     res.redirect('/dashboard');
                 }
                 else {

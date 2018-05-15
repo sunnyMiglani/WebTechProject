@@ -6,7 +6,9 @@ body {
     /* background-color: #085a79; */
     background-image: url('/carie.jpg');
     background-size: 100%;
+
     
+    text-shadow: 0 0 0 #000;
 }
 
 footer {
