@@ -3,6 +3,7 @@
 <script type="text/javascript" src="Resources/home.js"></script>
 <link href="home.css" rel="stylesheet" type="text/css"/>
 <link href="basicLayout.css" rel="stylesheet" type="text/css"/>
+<script src="login.js"></script>
     <head>
         <metacharset="UTF-8"/>
         <title>Homiezz</title>
@@ -15,13 +16,75 @@
             <li><a href="">Contact</a></li>
             <li style="float:right"><a href="/login">Signup/Login</a></li>
         </ul> 
-        
-    </body>
-<footer>
-    <p> Welcome to Homiezz </p>
-    <pre>
 
-____||____
+<section class="loginContainer">
+    <section class="container left">
+    <form action="/signin" method="POST">
+        <label for="uname"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+
+        <button type="submit" value="Submit">Login</button>
+        <label>
+        <input type="checkbox" checked="checked" name="remember"> <b>Remember me</b>
+        </label>
+        <div class="container">
+            <span class="psw"> <b>
+            <a href="page2"> Forgot password?</a> </b></span>
+        </div>
+    </form>
+</section>
+
+<section class="container right">
+    <form action="/signup" method="POST">
+        <div class="realNames">
+            <div class="fname">
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" placeholder="Enter First name" name="fname" required>
+            </div>
+            <div class="lname">
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter First name" name="lname" required>
+
+            </div>
+        </div>
+        <label for="email"><b>Email</b></label>
+        <input type="text" id="emailEnter" placeholder="Enter Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z{2,}]" required>
+        
+        <label for="psw"><b>Password</b></label>
+        <input type="password" id="regPsw" placeholder="Enter Password" name="psw" pattern="(?=.*\d).{8,}" required>
+        <div>
+            <label for="repsw"><b>Re-enter Password</b></label>
+            <input type="password" id="regPswTwo" placeholder="Enter Password" name="repsw" required>
+        </div>
+
+        <button type="submit" id="subButton" value="Submit">Signup</button>
+
+        <div id="requirements">
+            <h3>Information must match the folling</h3>
+            <p id="email" class="invalid">Validity of Email</p>
+            <p id="number" class="invalid">Password has One or more <b>numbers</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b> for password </p>
+            <p id="both" class="invalid">Confirm Password</p>
+        </div>
+    </form>
+    </section>
+</section>
+
+
+    </body>
+
+
+
+
+
+
+
+    <footer>
+    <p> Welcome to Homiezz </p><pre>
 ///////////\
 ///////////  \
 |    _    |  |

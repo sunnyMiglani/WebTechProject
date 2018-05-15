@@ -87,8 +87,17 @@ module.exports = function(app, db) {
     });
 
     /////////////////////////// image files ///////////////////////////////
-    app.get('avatar.png', function(req, res) {
-        res.sendFile(path.resolve(publicRes + 'images/avatar.png'));
+    app.get('/avatar.png', function(req, res) {
+        res.sendFile(path.resolve(publicRes + 'Images/avatar.png'));
+    });
+    app.get('/horsie.jpg', function (req, res) {
+        res.sendFile(path.resolve(publicRes + 'Images/horsie.jpg'));
+    });
+    app.get('/houses.jpg', function (req, res) {
+        res.sendFile(path.resolve(publicRes + 'Images/houses.jpg'));
+    });
+    app.get('/carie.jpg', function (req, res) {
+        res.sendFile(path.resolve(publicRes + 'Images/carie.jpg'));
     });
 
     ///////////////////////////// js files ////////////////////////////////
