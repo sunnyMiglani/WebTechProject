@@ -1,6 +1,7 @@
 "use strict"
 const publicRes = __dirname + '/../Public/Resources/';
 const publicPath = __dirname + '/../Public/';
+const htmlPath = publicRes + 'Html/';
 const cssPath = __dirname + '/../Public/Resources/CSS/';
 const jsPath = __dirname + '/../Public/Resources/Javascript/';
 
@@ -40,15 +41,19 @@ module.exports = function(app, db) {
 
     /////////////////////////// html files ////////////////////////////////
     app.get('/', sessionChecker, function(req, res) {
-        res.sendFile(path.resolve(publicPath + 'home.html'));
+        res.sendFile(path.resolve(htmlPath + 'home.html'));
     });
 
     app.get('/page2', function(req, res) {
-        res.sendFile(path.resolve(publicPath + 'page2.html'));
+        res.sendFile(path.resolve(htmlPath + 'page2.html'));
     });
 
     app.get('/login', sessionChecker, function(req, res) {
-        res.sendFile(path.resolve(publicPath + 'login.html'));
+        res.sendFile(path.resolve(htmlPath + 'login.html'));
+    });
+
+    app.get('/dashboardBody', function(req, res) {                  //TODO: finish to generate the dynamic stuff
+        res.sendFile(path.resolve(htmlPath + 'join_house.html'));
     });
 
     app.get('/dashboard', function(req, res) {
@@ -56,7 +61,7 @@ module.exports = function(app, db) {
         console.log(req.session.user_sid);
         if (req.session.user && req.cookies.user_sid) {
             console.log("Dashboard: Is a session user");
-            res.sendFile(path.resolve(publicPath + 'dashboard.html'));
+            res.sendFile(path.resolve(htmlPath + 'dashboard.html'));
         } else {
             console.log("Dashboard: Not a session user");
             res.redirect('/login');
@@ -66,7 +71,7 @@ module.exports = function(app, db) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            res.sendFile(path.resolve(publicPath + 'account.html'));
+            res.sendFile(path.resolve(htmlPath + 'account.html'));
         } else {
             console.log("Account: Not a session user");
             res.redirect('/login');
@@ -103,6 +108,10 @@ module.exports = function(app, db) {
     ///////////////////////////// js files ////////////////////////////////
     app.get('/Resources/home.js', function(req, res) {
         res.sendFile(path.resolve(jsPath + 'home.js'));
+    });
+
+    app.get('/Resources/dashboard.js', function(req, res) {
+        res.sendFile(path.resolve(jsPath + 'dashboard.js'));
     });
 
     app.get('/login.js', function(req, res) {

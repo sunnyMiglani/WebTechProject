@@ -2,7 +2,7 @@
 
 window.onload = function() {
     var firstPass = document.getElementById("regPsw");
-    var secondPass = document.getElementById("regPswTwo")
+    var secondPass = document.getElementById("regPswTwo");
 
     var emailEnt = document.getElementById("emailEnter");
 
