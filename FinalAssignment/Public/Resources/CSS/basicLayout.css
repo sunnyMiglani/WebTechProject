@@ -1,10 +1,21 @@
 head {
-    background-color: #264653;
+    background-color: #085a79;
 }
 
 body {
-    background-color: #264653;
+    background-color: #085a79;
 }
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(6, 133, 236);
+    color: white;
+    text-align: center;
+}
+
 
 ul {
     list-style-type: none;
@@ -13,6 +24,7 @@ ul {
     overflow: hidden;
     background-color: #2a9d8f;
 }
+
 
 li a {
     float: left;
