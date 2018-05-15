@@ -72,7 +72,7 @@ module.exports = function(app, db) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            res.sendFile(path.resolve(htmlPath + 'account.html'));
+            res.sendFile(path.resolve(htmlPath + 'my_account.html'));
         } else {
             console.log("Account: Not a session user");
             res.redirect('/login');
@@ -91,8 +91,13 @@ module.exports = function(app, db) {
     app.get('/login.css', function(req, res) {
         res.sendFile(path.resolve(cssPath + 'login.css'));
     });
+
     app.get('/404.css', function (req, res) {
         res.sendFile(path.resolve(cssPath + '404.css'));
+    });
+
+    app.get('/my_account.css', function (req, res) {
+        res.sendFile(path.resolve(cssPath + 'my_account.css'));
     });
 
     /////////////////////////// image files ///////////////////////////////
@@ -125,6 +130,11 @@ module.exports = function(app, db) {
     app.get('/login.js', function(req, res) {
         res.sendFile(path.resolve(jsPath + 'login.js'));
     });
+
+    app.get('/my_account.js', function (req, res) {
+        res.sendFile(path.resolve(jsPath + 'my_account.js'));
+    });
+
 
 
     ////////////////////////// Database/login requests ////////////////////
@@ -207,9 +217,26 @@ module.exports = function(app, db) {
         joinGroup(houseName, email, req, res);
     });
 
+    /*
     app.post('/joinuser', function(req, res) {
 
     });
+     */
+
+    app.post('/myaccountinfo', function(req,res) {
+        var currentEmail = req.session.user.email;
+        db.getUserData(email , function(returnedRow) {
+            if(returnedRow == undefined){
+                console.log("User not found!");
+                res.redirect('/login');
+            }
+            else{
+                console.log("found myAccountinfo!! ")
+                res.send(returnedRow);
+            }    
+        });
+    });
+
 
     ////////////////////////// Helper callback funtions /////////////// TODO: maybe move these to a more appropriate file
 

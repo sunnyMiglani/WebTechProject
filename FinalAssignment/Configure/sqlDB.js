@@ -130,6 +130,31 @@ class sqlDB {
         });
         this.closeDB(db);
     }
+
+    getUserData(email, callback){
+        var db = this.openDB();
+        let sqlQuery = 'SELECT Email email, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';
+        db.all(sqlQuery, [email], function (err, rows) {
+            if (err) {
+                console.log(err.message);
+            }
+            else {
+                //callback with user object
+                if (rows[0] !== undefined) {
+                    console.log(`${rows[0].name} ${rows[0].pass}`); // TODO: Fix 
+                    if (callback) {
+                        callback(rows[0]);
+                    }
+                }
+                //callback with user not found
+                else {
+                    if (callback) {
+                        callback(undefined);
+                    }
+                }
+            }
+        });
+    }
 }
 
 module.exports = sqlDB;
