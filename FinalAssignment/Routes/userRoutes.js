@@ -85,6 +85,9 @@ module.exports = function(app, db) {
     app.get('/login.css', function(req, res) {
         res.sendFile(path.resolve(cssPath + 'login.css'));
     });
+    app.get('/404.css', function (req, res) {
+        res.sendFile(path.resolve(cssPath + '404.css'));
+    });
 
     /////////////////////////// image files ///////////////////////////////
     app.get('/avatar.png', function(req, res) {
@@ -98,6 +101,9 @@ module.exports = function(app, db) {
     });
     app.get('/carie.jpg', function (req, res) {
         res.sendFile(path.resolve(publicRes + 'Images/carie.jpg'));
+    });
+    app.get('/404.png', function (req, res) {
+        res.sendFile(path.resolve(publicRes + 'Images/houseEdited.png'));
     });
 
     ///////////////////////////// js files ////////////////////////////////
@@ -214,6 +220,7 @@ module.exports = function(app, db) {
 
     ////////////////////////// Error handling ////////////////////////
     app.use(function (req, res, next) {
-        res.status(404).send("Sorry that page doesn\'t exist");
+        // res.status(404).sendFile(path.resolve(.... etc ))//send("Sorry that page doesn\'t exist");
+        res.status(404).sendFile(path.resolve(publicPath + '404.html'));
     });
 };
