@@ -33,7 +33,7 @@ class sqlDB {
         var db = this.openDB();
         db.serialize(function() {
             //look for user and house table in database and create if not present
-            db.run('CREATE TABLE IF NOT EXISTS HouseGroups(GroupID INTEGER PRIMARY KEY AUTOINCREMENT, HouseName TEXT NOT NULL)'); 
+            db.run('CREATE TABLE IF NOT EXISTS HouseGroups(GroupID INTEGER PRIMARY KEY AUTOINCREMENT, HouseName TEXT UNIQUE NOT NULL)'); 
             db.run('CREATE TABLE IF NOT EXISTS users(Email TEXT NOT NULL, Pass TEXT NOT NULL, Fname TEXT NOT NULL,\
                     Lname TEXT NOT NULL, HouseID INTEGER NOT NULL, FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
             
@@ -61,29 +61,38 @@ class sqlDB {
         this.closeDB(db);
     }
 
-    joinHouseGroup(houseName, userTojoin, callback) {
+    //given a house name and a user to join the house
+    joinHouseGroup(houseName, email, callback) {
         var db = this.openDB();
-            db.run('SELECT GroupID gid HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, row) {
+            db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, retRow) {
                 if(err) {
                     console.log(err.message);
                 }
-                db.run('UPDATE users SET HouseID= ? WHERE email = ?', [row[0], userTojoin], function(err) {
-                    if(err) {
-                        console.log(err.message);
-                    }
-                    if(callback) {
-                        callback();
-                    }
-                });
+                if(retRow !== undefined) {
+                    console.log("House found");
+                    console.log(JSON.stringify(retRow));
+                    console.log(JSON.stringify(retRow[0].gid));
+                    console.log(email);
+                    db.run('UPDATE users SET HouseID= ? WHERE email = ?', [retRow[0].gid, email], function(err) {
+                        if(err) {
+                            console.log(err.message);
+                        }
+                        if(callback) {
+                            callback(retRow);
+                        }
+                    });
+                }
+                else {
+                    console.log("House not found");
+                }
             });
         this.closeDB(db);
     }
 
-
     //add user to user table
     addUser(tableName, email, psw, Fname, Lname, callback) {
         var db = this.openDB();
-        db.run('INSERT INTO users(Email, Pass, Fname, Lname, HouseID) VALUES(?, ?, ?, ?, ?)', [email, psw, Fname, Lname, 0], function(err) {
+        db.run('INSERT INTO users(Email, Pass, Fname, Lname, HouseID) VALUES(?, ?, ?, ?, ?)', [email, psw, Fname, Lname, 1], function(err) {
             if (err) {
                 return console.log(err.message);
             }
