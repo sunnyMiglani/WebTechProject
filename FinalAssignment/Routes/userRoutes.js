@@ -101,6 +101,7 @@ module.exports = function(app, db) {
     app.get('/horsie.jpg', function (req, res) {
         res.sendFile(path.resolve(publicRes + 'Images/horsie.jpg'));
     });
+
     app.get('/houses.jpg', function (req, res) {
         res.sendFile(path.resolve(publicRes + 'Images/houses.jpg'));
     });
@@ -230,6 +231,6 @@ module.exports = function(app, db) {
     ////////////////////////// Error handling ////////////////////////
     app.use(function (req, res, next) {
         // res.status(404).sendFile(path.resolve(.... etc ))//send("Sorry that page doesn\'t exist");
-        res.status(404).sendFile(path.resolve(publicPath + '404.html'));
+        res.status(404).sendFile(path.resolve(htmlPath + '404.html'));
     });
 };
