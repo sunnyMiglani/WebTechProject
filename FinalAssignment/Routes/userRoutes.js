@@ -223,7 +223,8 @@ module.exports = function(app, db) {
     });
      */
 
-    app.post('/myaccountinfo', function(req,res) {
+    app.post('myaccountinfo', function(req,res) {
+        console.log("myAccountInfoStuff");
         var currentEmail = req.session.user.email;
         db.getUserData(email , function(returnedRow) {
             if(returnedRow == undefined){

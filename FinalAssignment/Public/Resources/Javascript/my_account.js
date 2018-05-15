@@ -32,8 +32,9 @@ function getUserData(xmlhttp, userData){
     xmlhttp.onreadystatechange = function(){
         if(this.readystate == 4 && this.status == 200){
             userData = this.responseText;
+            console.log("in user data!");
         }
     }
-    xmlhttp.open("GET", "/myaccountinfo", true);
+    xmlhttp.open("GET", '/myaccountinfo', true);
     xmlhttp.send();
 }
