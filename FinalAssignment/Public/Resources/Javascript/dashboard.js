@@ -10,14 +10,14 @@ window.onload = function() {
         // code for old IE browsers
         var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     } 
-    getBody(xmlhttp, body);
+    setBody(xmlhttp, body);
 }
 
 
-function getBody(xmlhttp, body) {
+function setBody(xmlhttp, body) {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-        body.innerHTML = this.responseText;
+            body.innerHTML = this.responseText;
         }
     };
     xmlhttp.open("GET", "/dashboardBody", true);

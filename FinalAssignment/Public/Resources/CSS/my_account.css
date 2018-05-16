@@ -1,0 +1,13 @@
+.backgroundContainers {
+    background-color:  #264653;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    margin-top: 10%;
+}
+.myDetails {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    color: aliceblue;
+}

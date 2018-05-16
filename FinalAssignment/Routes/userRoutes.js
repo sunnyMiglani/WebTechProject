@@ -73,7 +73,7 @@ module.exports = function(app, db, hashPass) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            res.sendFile(path.resolve(htmlPath + 'account.html'));
+            res.sendFile(path.resolve(htmlPath + 'my_account.html'));
         } else {
             console.log("Account: Not a session user");
             res.redirect('/login');
@@ -92,8 +92,13 @@ module.exports = function(app, db, hashPass) {
     app.get('/login.css', function(req, res) {
         res.sendFile(path.resolve(cssPath + 'login.css'));
     });
+
     app.get('/404.css', function (req, res) {
         res.sendFile(path.resolve(cssPath + '404.css'));
+    });
+
+    app.get('/my_account.css', function (req, res) {
+        res.sendFile(path.resolve(cssPath + 'my_account.css'));
     });
 
     /////////////////////////// image files ///////////////////////////////
@@ -126,6 +131,11 @@ module.exports = function(app, db, hashPass) {
     app.get('/login.js', function(req, res) {
         res.sendFile(path.resolve(jsPath + 'login.js'));
     });
+
+    app.get('/my_account.js', function (req, res) {
+        res.sendFile(path.resolve(jsPath + 'my_account.js'));
+    });
+
 
 
     ////////////////////////// Database/login requests ////////////////////
@@ -211,9 +221,29 @@ module.exports = function(app, db, hashPass) {
         joinGroup(houseName, email, req, res);
     });
 
+    /*
     app.post('/joinuser', function(req, res) {
 
     });
+     */
+
+    app.get('/myaccountinfo', function(req,res) {
+        console.log("myAccountInfoStuff");
+        var currentEmail = req.session.user.email;
+        db.getUserData(currentEmail , function(returnedRow) {
+            if(returnedRow == undefined){
+                console.log("User not found!");
+                res.redirect('/login');
+            }
+            else{
+                console.log("found myAccountinfo!!");
+                console.log("Returned row : " + JSON.stringify(returnedRow));
+                res.status(200);
+                res.json(returnedRow);
+            }    
+        });
+    });
+
 
     ////////////////////////// Helper callback funtions /////////////// TODO: maybe move these to a more appropriate file
 
