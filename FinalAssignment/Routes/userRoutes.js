@@ -260,20 +260,10 @@ module.exports = function(app, db, hashPass) {
     });
 
 
-    ////////////////////////// Helper callback funtions /////////////// TODO: maybe move these to a more appropriate file
-
+    ////////////////////////// Helper callback funtions /////////////// 
     function joinGroup(houseName, email, req, res) {
         db.joinHouseGroup(houseName, email, function() {
-            db.findUser(email, function(row) {
-                if(row !== undefined) {
-                    console.log("New row for user = " + JSON.stringify(row));
-                    res.redirect('/dashboard');
-                }
-                else {
-                    console.log("Error: added user to house, but user was not found again");
-                    res.redirect('/dashboard');
-                }
-            });   
+            res.redirect('/dashboard');
         });   
     }
 
