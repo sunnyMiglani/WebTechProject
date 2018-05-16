@@ -43,7 +43,10 @@ module.exports = function(app, db, hashPass) {
 
     /////////////////////////// html files ////////////////////////////////
     app.get('/', sessionChecker, function(req, res) {
-        res.sendFile(path.resolve(htmlPath + 'home.html'));
+        res.render('home', {
+            LoginOrAcc: '/account',
+            loginAccDisplay: "My Account"
+        });
     });
 
     app.get('/page2', function(req, res) {
@@ -55,13 +58,13 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(htmlPath + 'join_house.html'));
     });
 
-    app.get('/about', function (req, res) {                  //TODO: finish to generate the dynamic stuff
-        res.sendFile(path.resolve(htmlPath + 'about.html'));
+    app.get('/about', function (req, res) {  
+        res.render('about', {
+            LoginOrAcc: '/account',
+            loginAccDisplay: "My Account" });
     });
 
     app.get('/dashboard', function(req, res) {
-        console.log(req.session.user);
-        console.log(req.session.user_sid);
         if (req.session.user && req.cookies.user_sid) {
             console.log("Dashboard: Is a session user");
             res.render('dashboard', {
@@ -79,7 +82,10 @@ module.exports = function(app, db, hashPass) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            res.sendFile(path.resolve(htmlPath + 'my_account.html'));
+            res.render('my_account', {
+                LoginOrAcc: '/account',
+                loginAccDisplay: "My Account"
+            });
         } else {
             console.log("Account: Not a session user");
             res.redirect('/');
