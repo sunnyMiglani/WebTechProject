@@ -65,11 +65,12 @@ class sqlDB {
     joinHouseGroup(houseName, email, callback) {
         var db = this.openDB();
             db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, retRow) {
-                if(err) {
+                if (err) {
                     console.log(err.message);
                 }
-                if(retRow !== undefined) {
+                else if (retRow && retRow.length > 0) {
                     console.log("House found");
+                    console.log("the thing itself : "+retRow);
                     console.log(JSON.stringify(retRow));
                     console.log(JSON.stringify(retRow[0].gid));
                     console.log(email);
@@ -84,6 +85,9 @@ class sqlDB {
                 }
                 else {
                     console.log("House not found");
+                    if(callback){
+                        callback(undefined)
+                    }
                 }
             });
         this.closeDB(db);
