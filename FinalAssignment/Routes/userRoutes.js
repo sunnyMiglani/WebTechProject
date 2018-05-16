@@ -50,9 +50,6 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(htmlPath + 'page2.html'));
     });
 
-    app.get('/login', sessionChecker, function(req, res) {
-        res.sendFile(path.resolve(htmlPath + 'login.html'));
-    });
 
     app.get('/dashboardBody', function(req, res) {                  //TODO: finish to generate the dynamic stuff
         res.sendFile(path.resolve(htmlPath + 'join_house.html'));
@@ -66,7 +63,7 @@ module.exports = function(app, db, hashPass) {
             res.render('dashboard');
         } else {
             console.log("Dashboard: Not a session user");
-            res.redirect('/login');
+            res.redirect('/');
         }
     });
 
@@ -77,7 +74,7 @@ module.exports = function(app, db, hashPass) {
             res.sendFile(path.resolve(htmlPath + 'my_account.html'));
         } else {
             console.log("Account: Not a session user");
-            res.redirect('/login');
+            res.redirect('/');
         }
     });
 
@@ -88,10 +85,6 @@ module.exports = function(app, db, hashPass) {
 
     app.get('/home.css', function(req, res) {
         res.sendFile(path.resolve(cssPath + 'home.css'));
-    });
-
-    app.get('/login.css', function(req, res) {
-        res.sendFile(path.resolve(cssPath + 'login.css'));
     });
 
     app.get('/404.css', function (req, res) {
@@ -129,10 +122,6 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(jsPath + 'dashboard.js'));
     });
 
-    app.get('/login.js', function(req, res) {
-        res.sendFile(path.resolve(jsPath + 'login.js'));
-    });
-
     app.get('/my_account.js', function (req, res) {
         res.sendFile(path.resolve(jsPath + 'my_account.js'));
     });
@@ -156,7 +145,7 @@ module.exports = function(app, db, hashPass) {
                 db.findUser(email, function(returnedRow) {
                     if(returnedRow !== undefined) {
                         console.log("User email already exists");
-                        res.redirect('/login');
+                        res.redirect('/');
                     }
                     else {
                         db.addUser('users', email, hash, fname, lname, function() {
@@ -186,7 +175,7 @@ module.exports = function(app, db, hashPass) {
             db.findUser(email, function(returnedRow) {
                 if(returnedRow === undefined) {
                     console.log("User not found");
-                    res.redirect('/login');
+                    res.redirect('/');
                 }
                 //hash pass and verify 
                 else if(hashPass.verify(psw,returnedRow.pass)) {
@@ -196,7 +185,7 @@ module.exports = function(app, db, hashPass) {
                 }
                 else {
                     console.log("Incorect password");
-                    res.redirect('/login');
+                    res.redirect('/');
                 }
             });
         }
@@ -234,7 +223,7 @@ module.exports = function(app, db, hashPass) {
         db.getUserData(currentEmail , function(returnedRow) {
             if(returnedRow == undefined){
                 console.log("User not found!");
-                res.redirect('/login');
+                res.redirect('/');
             }
             else{
                 console.log("found myAccountinfo!!");
