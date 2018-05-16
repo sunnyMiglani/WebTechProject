@@ -1,6 +1,9 @@
 head {
     background-color: #085a79;
 }
+body {
+    background-image:url('/newhouses.jpg');
+}
 
 footer {
     position: fixed;
@@ -43,7 +46,10 @@ li a:hover:not(.active) {
 
 /* Center the avatar image inside this container */
 .imgcontainer {
-    padding-top: 10%;
+    background-color: white;
+    align-content: center;
+    width: 30%;
     text-align: center;
-    margin: 24px 0 12px 0;
+    margin: auto; 
+    margin-top: 5%;
 }
