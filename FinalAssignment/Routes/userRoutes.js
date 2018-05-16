@@ -58,6 +58,10 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(htmlPath + 'join_house.html'));
     });
 
+    app.get('/about', function (req, res) {                  //TODO: finish to generate the dynamic stuff
+        res.sendFile(path.resolve(htmlPath + 'about.html'));
+    });
+
     app.get('/dashboard', function(req, res) {
         console.log(req.session.user);
         console.log(req.session.user_sid);
@@ -89,6 +93,10 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(cssPath + 'home.css'));
     });
 
+    app.get('/about.css', function (req, res) {
+        res.sendFile(path.resolve(cssPath + 'about.css'));
+    });
+
     app.get('/login.css', function(req, res) {
         res.sendFile(path.resolve(cssPath + 'login.css'));
     });
@@ -99,6 +107,10 @@ module.exports = function(app, db, hashPass) {
 
     app.get('/my_account.css', function (req, res) {
         res.sendFile(path.resolve(cssPath + 'my_account.css'));
+    }); 
+    
+    app.get('/join_house.css', function (req, res) {
+        res.sendFile(path.resolve(cssPath + 'join_house.css'));
     });
 
     /////////////////////////// image files ///////////////////////////////
@@ -117,6 +129,9 @@ module.exports = function(app, db, hashPass) {
     });
     app.get('/404.png', function (req, res) {
         res.sendFile(path.resolve(publicRes + 'Images/houseEdited.png'));
+    }); 
+    app.get('/newhouses.jpg', function (req, res) {
+        res.sendFile(path.resolve(publicRes + 'Images/newhouses.jpg'));
     });
 
     ///////////////////////////// js files ////////////////////////////////

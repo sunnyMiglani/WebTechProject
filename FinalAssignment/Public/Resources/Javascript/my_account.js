@@ -18,7 +18,6 @@ window.onload = function(){
     } -- DO NOT UNCOMMENT THIS AS IT IS DDOSING THE SERVER --
     */
 
-
 }
 
 function getUserData(xmlhttp){
@@ -48,10 +47,10 @@ function showUserData(userData){
     console.log((userData));
     
     
-    fName.innerHTML = userData.fname;
-    lName.innerHTML = userData.lname;
-    email.innerHTML = userData.email;
-    houseId.innerHTML = userData.houseID;
+    fName.innerHTML = "First Name : "+ userData.fname;
+    lName.innerHTML = "Last Name : "+userData.lname;
+    email.innerHTML = "Email ID : "+userData.email;
+    houseId.innerHTML = "HouseID : "+userData.houseID;
 
 
 }

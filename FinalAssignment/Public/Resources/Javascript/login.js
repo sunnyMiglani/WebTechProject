@@ -24,6 +24,8 @@ window.onload = function() {
         console.log("CANNOT FIND THE CORRECT ELEMENT IN LOGIN.JS");
     }
 
+    
+
     secondPass.onfocus = displayRequirements;
     firstPass.onfocus = displayRequirements;
     secondPass.onblur = hideRequirements;
