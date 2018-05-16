@@ -223,17 +223,19 @@ module.exports = function(app, db) {
     });
      */
 
-    app.post('myaccountinfo', function(req,res) {
+    app.get('/myaccountinfo', function(req,res) {
         console.log("myAccountInfoStuff");
         var currentEmail = req.session.user.email;
-        db.getUserData(email , function(returnedRow) {
+        db.getUserData(currentEmail , function(returnedRow) {
             if(returnedRow == undefined){
                 console.log("User not found!");
                 res.redirect('/login');
             }
             else{
-                console.log("found myAccountinfo!! ")
-                res.send(returnedRow);
+                console.log("found myAccountinfo!!");
+                console.log("Returned row : " + JSON.stringify(returnedRow));
+                res.status(200);
+                res.json(returnedRow);
             }    
         });
     });

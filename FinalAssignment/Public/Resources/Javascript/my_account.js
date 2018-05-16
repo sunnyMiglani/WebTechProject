@@ -1,13 +1,6 @@
 "use strict"
 
 window.onload = function(){
-    var fName = document.getElementsByTagName("fName");
-    var lName = document.getElementsByTagName("lName");
-    var email = document.getElementsByTagName("email");
-
-    var userData;
-    console.log("on my account js now!")
-
     if(window.XMLHttpRequest){
         // Code for modern
         var xmlhttp = new XMLHttpRequest();
@@ -16,7 +9,7 @@ window.onload = function(){
         // for other browsers
         var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    getUserData(xmlhttp, userData);
+    getUserData(xmlhttp);
 
     /* -- DO NOT UNCOMMENT THIS AS IT IS DDOSING THE SERVER --
     while(userData === null || userData === undefined){
@@ -24,17 +17,41 @@ window.onload = function(){
         getUserData(xmlhttp,userData);
     } -- DO NOT UNCOMMENT THIS AS IT IS DDOSING THE SERVER --
     */
-    
-    console.log(userData);
+
+
 }
 
-function getUserData(xmlhttp, userData){
+function getUserData(xmlhttp){
+    var userData;
     xmlhttp.onreadystatechange = function(){
-        if(this.readystate == 4 && this.status == 200){
+        console.log("this status : "+this.status);
+        console.log("this ready state : "+this.readyState);
+
+        if(this.readyState == 4 && this.status == 200){
             userData = this.responseText;
             console.log("in user data!");
+            console.log(userData);
+            userData = JSON.parse(userData);
+            showUserData(userData);
         }
     }
     xmlhttp.open("GET", '/myaccountinfo', true);
     xmlhttp.send();
+}
+
+function showUserData(userData){
+    var fName = document.getElementById("fName");
+    var lName = document.getElementById("lName");
+    var email = document.getElementById("email");
+    var houseId = document.getElementById("house");
+
+    console.log((userData));
+    
+    
+    fName.innerHTML = userData.fname;
+    lName.innerHTML = userData.lname;
+    email.innerHTML = userData.email;
+    houseId.innerHTML = userData.houseID;
+
+
 }
