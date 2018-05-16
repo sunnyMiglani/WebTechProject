@@ -115,7 +115,6 @@ class sqlDB {
             else {
                 //callback with user object
                 if(rows[0] !== undefined) {
-                    console.log(`${rows[0].name} ${rows[0].pass}`);
                     if(callback) {
                         callback(rows[0]);
                     }

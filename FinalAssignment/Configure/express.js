@@ -7,10 +7,12 @@ var https = require('https');
 var session = require('express-session');
 const express = expressConf();
 var cookieParser = require('cookie-parser');
-var httpsKey = fs.readFileSync('Encryption/domain.key');
-var httpsCert = fs.readFileSync('Encryption/domain.crt');
 
+var httpsKey = fs.readFileSync('Configure/Security/domain.key');
+var httpsCert = fs.readFileSync('Configure/Security/domain.crt');
 var credentials = {key: httpsKey, cert: httpsCert};
+
+var hashPass = require('../Configure/Security/hash.js');
 
 
 module.exports = function(db) {
@@ -31,7 +33,7 @@ module.exports = function(db) {
     }));
     
     app.use(expressConf.static(__dirname + '/../Public/Resources/images'));
-    require(path.resolve(__dirname + '/../Routes/userRoutes.js'))(app, db);
+    require(path.resolve(__dirname + '/../Routes/userRoutes.js'))(app, db, hashPass);
     var httpsServer = https.createServer(credentials, app);    
     var httpServer = http.createServer(app);
 

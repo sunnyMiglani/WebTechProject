@@ -5,11 +5,12 @@ const htmlPath = publicRes + 'Html/';
 const cssPath = __dirname + '/../Public/Resources/CSS/';
 const jsPath = __dirname + '/../Public/Resources/Javascript/';
 
+
 var path = require('path');
 var bodyParser = require('body-parser');
 
 
-module.exports = function(app, db) {
+module.exports = function(app, db, hashPass) {
 
     /////////////////////////// middleware ////////////////////////////////
 
@@ -139,13 +140,15 @@ module.exports = function(app, db) {
             var fname = req.body.fname;
             var lname = req.body.lname;
             if(pass === repsw) {
+                //salt and hash pass to save in Database
+                var hash = hashPass.hash(pass);
                 db.findUser(email, function(returnedRow) {
                     if(returnedRow !== undefined) {
                         console.log("User email already exists");
                         res.redirect('/login');
                     }
                     else {
-                        db.addUser('users', email, pass, fname, lname, function() {
+                        db.addUser('users', email, hash, fname, lname, function() {
                             console.log("Signup: going to dashboard");
                             req.session.user = {email};
                             res.redirect('/dashboard');
@@ -174,7 +177,8 @@ module.exports = function(app, db) {
                     console.log("User not found");
                     res.redirect('/login');
                 }
-                else if(returnedRow.pass === psw) {
+                //hash pass and verify 
+                else if(hashPass.verify(psw,returnedRow.pass)) {
                     console.log("User logged in");
                     req.session.user = {email};
                     res.redirect('/dashboard');

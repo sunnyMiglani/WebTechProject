@@ -47,3 +47,6 @@ https://coolors.co/browser/best/1)
 https://www.codementor.io/emjay/how-to-build-a-simple-session-based-authentication-system-with-nodejs-from-scratch-6vn67mcy3)
 
 -- [Made a key and cert using this](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
+
+-- [Password hash] (
+https://ciphertrick.com/2016/01/18/salt-hash-passwords-using-nodejs-crypto/)
