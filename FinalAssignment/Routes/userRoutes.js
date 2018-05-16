@@ -16,7 +16,7 @@ module.exports = function(app, db, hashPass) {
 
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: false }));
-
+    app.set('view engine', 'ejs')
     app.use(function(req,res,next){
         if(req.secure){
             next();
@@ -63,12 +63,13 @@ module.exports = function(app, db, hashPass) {
         console.log(req.session.user_sid);
         if (req.session.user && req.cookies.user_sid) {
             console.log("Dashboard: Is a session user");
-            res.sendFile(path.resolve(htmlPath + 'dashboard.html'));
+            res.render('dashboard');
         } else {
             console.log("Dashboard: Not a session user");
             res.redirect('/login');
         }
     });
+
 
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
