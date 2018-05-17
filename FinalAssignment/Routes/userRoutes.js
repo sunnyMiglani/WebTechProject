@@ -45,7 +45,10 @@ module.exports = function(app, db, hashPass) {
     app.get('/', sessionChecker, function(req, res) {
         res.render('home', {
             LoginOrAcc: '/account',
-            loginAccDisplay: "My Account"
+            loginAccDisplay: "My Account",
+            activeField: ["active", "inactive", "inactive", "inactive"],
+            links: ["/dashboard", "/about", "/dashboard", "/account"],
+            label: ["Home", "About", "Contact", "My Account"]
         });
     });
 
@@ -70,9 +73,7 @@ module.exports = function(app, db, hashPass) {
             res.render('dashboard', {
                 dashView: 'partials/join_house.ejs',
                 cssFile: "join_house.css",  
-                activeField: ["active", "inactive", "inactive", "inactive"],
-                links: ["/dashboard", "/about", "/dashboard", "/account"],
-                label: ["Home", "About", "Contact", "My Account"]
+                
             });
         } else {
             console.log("Dashboard: Not a session user");
