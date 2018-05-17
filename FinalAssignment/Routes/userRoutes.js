@@ -9,6 +9,9 @@ const jsPath = __dirname + '/../Public/Resources/Javascript/';
 var path = require('path');
 var bodyParser = require('body-parser');
 
+var activeFields = [];
+var links = [];
+var label = [];
 
 module.exports = function(app, db, hashPass) {
 
