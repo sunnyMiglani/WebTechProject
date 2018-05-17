@@ -88,7 +88,7 @@ module.exports = function(app, db, hashPass) {
                             console.log("Shopping list = " + JSON.stringify(sList.sl));
                             console.log(JSON.parse(sList.sl));
                             res.render('dashboard', {
-                                cssFile: "join_house.css",
+                                cssFile: "shopping.css",
                                 activeField: ["active", "inactive", "inactive", "inactive"],
                                 links: ['/dashboard', '/about', '/dashboard', '/account'],
                                 label: ["Home", "About", "Contact", "My Account"],
@@ -149,6 +149,10 @@ module.exports = function(app, db, hashPass) {
     
     app.get('/join_house.css', function (req, res) {
         res.sendFile(path.resolve(cssPath + 'join_house.css'));
+    });
+
+    app.get('/shopping.css', function (req, res) {
+        res.sendFile(path.resolve(cssPath + 'shopping.css'));
     });
 
     /////////////////////////// image files ///////////////////////////////
