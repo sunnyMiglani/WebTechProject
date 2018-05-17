@@ -70,7 +70,8 @@ module.exports = function(app, db, hashPass) {
             res.render('dashboard', {
                 LoginOrAcc: '/account',
                 loginAccDisplay: "My Account",
-                dashView: 'partials/join_house.ejs'
+                dashView: 'partials/join_house.ejs',
+                cssFile: "join_house.css"  
             });
         } else {
             console.log("Dashboard: Not a session user");
