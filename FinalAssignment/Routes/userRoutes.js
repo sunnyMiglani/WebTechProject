@@ -70,11 +70,20 @@ module.exports = function(app, db, hashPass) {
                 //user belongs to a house
                 else {
                     //get shopping data
-                    res.render('dashboard', {
-                        LoginOrAcc: '/account',
-                        loginAccDisplay: "My Account",
-                        dashView: 'partials/join_house.ejs'
+                    db.getHouseIDFromUser(email, function(row) {
+                        var hid = row.houseID;
+                        db.getShoppingListByHouseID(hid, function(sList) {
+                            console.log("Shopping list = " + JSON.stringify(sList.sl));
+
+                            res.render('dashboard', {
+                                LoginOrAcc: '/account',
+                                loginAccDisplay: "My Account",
+                                dashView: 'partials/shopping.ejs',
+                                shopping: JSON.parse(sList.sl)
+                            });
+                        });
                     });
+                    
                     //get bills data
                     //get messages?
                     //insert data to pages
@@ -233,9 +242,9 @@ module.exports = function(app, db, hashPass) {
         var email = req.session.user.email;
         db.addHouseGroup(houseName, function(row) {
             console.log("New house = " + JSON.stringify(row));
-            db.addShoppingListToHouse(row.gid);
-            console.log("added shopping list");
-            joinGroup(houseName, email, req, res);
+            db.addShoppingListToHouse(row.gid, function() {
+                joinGroup(houseName, email, req, res);
+            });7
         });
     });
 

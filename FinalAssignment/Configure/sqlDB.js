@@ -37,7 +37,7 @@ class sqlDB {
             db.run('CREATE TABLE IF NOT EXISTS users(Email TEXT NOT NULL, Pass TEXT NOT NULL, Fname TEXT NOT NULL,\
                     Lname TEXT NOT NULL, HouseID INTEGER NOT NULL, FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
 
-            db.run('CREATE TABLE IF NOT EXISTS Shopping(HouseID INTEGER PRIMARY KEY, ShoppingList TEXT,\
+            db.run('CREATE TABLE IF NOT EXISTS Shopping(HouseID INTEGER NOT NULL, ShoppingList TEXT,\
                     FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
             
             //Add global house position if not set already
@@ -51,21 +51,19 @@ class sqlDB {
         var db = this.openDB();
         db.serialize(function() {
             db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', [houseName]); //FIXME: WIll not create houses with same name
-            db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, row) {
+            db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, rows) {
                 if(err) {
                     console.log(err.message);
                 }
                 else {
                     if(callback) {
-                        callback(row);
+                        callback(rows[0]);
                     }
                 }
             });
         });
         this.closeDB(db);
     }
-
-
 
     //given a house name and a user to join the house
     joinHouseGroup(houseName, email, callback) {
@@ -116,7 +114,7 @@ class sqlDB {
         var sqlQuery;
         if(requirePass){ sqlQuery = 'SELECT Email email, Pass pass, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';}
         else{ sqlQuery = 'SELECT Email email, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';}
-        this.queryWithEmailHelper(db, sqlQuery, email, callback);
+        this.generalQueryHelper(db, sqlQuery, email, callback);
         this.closeDB(db);
     }
 
@@ -124,29 +122,27 @@ class sqlDB {
     getHouseIDFromUser(email, callback) {
         var db = this.openDB();
         let sqlQuery = 'SELECT HouseID houseID FROM users WHERE Email = ?';
-        this.queryWithEmailHelper(db, sqlQuery, email, callback);
+        this.generalQueryHelper(db, sqlQuery, email, callback);
         this.closeDB(db)
     }
 
     //////////////////////////// Shopping ///////////////////////////////////////////////////////
 
     addShoppingListToHouse(houseID, callback) {
+        console.log("houseid"+ houseID);
         var db = this.openDB();
-        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, []]);
-        if(callback) {
-            callback();
-        }
+        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, '["butter"]'], function(err) {
+            if(callback) {
+                callback();
+            }
+        });
         this.closeDB(db);
     }
 
     getShoppingListByHouseID(houseID, callback) {
         var db = this.openDB();
-        db.all('SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?', [houseID], function(err, row) {
-            console.log(row);
-            if (err) {
-                console.log(err.message);
-            }
-        });
+        var sqlQuery = 'SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?';
+        this.generalQueryHelper(db, sqlQuery, houseID, callback);
         this.closeDB(db);
     }
 
@@ -172,21 +168,14 @@ class sqlDB {
 
     //////////////////////////////// Helper functions ///////////////////////////////////////////
 
-    queryWithEmailHelper(db, sqlQuery, email, callback) {
-        db.all(sqlQuery, [email], function (err, rows) {
+    generalQueryHelper(db, sqlQuery, queryReq, callback) {
+        db.all(sqlQuery, [queryReq], function (err, rows) {
             if (err) {
                 console.log(err.message);
             }
             else {
-                if (rows[0] !== undefined) {
-                    if (callback) {
-                        callback(rows[0]);
-                    }
-                }
-                else {
-                    if (callback) {
-                        callback(undefined);
-                    }
+                if (callback) {
+                    callback(rows[0]);
                 }
             }
         });
