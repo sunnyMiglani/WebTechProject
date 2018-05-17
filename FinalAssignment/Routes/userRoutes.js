@@ -74,7 +74,7 @@ module.exports = function(app, db, hashPass) {
                         var hid = row.houseID;
                         db.getShoppingListByHouseID(hid, function(sList) {
                             console.log("Shopping list = " + JSON.stringify(sList.sl));
-
+                            console.log(JSON.parse(sList.sl));
                             res.render('dashboard', {
                                 LoginOrAcc: '/account',
                                 loginAccDisplay: "My Account",

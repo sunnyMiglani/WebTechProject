@@ -131,7 +131,7 @@ class sqlDB {
     addShoppingListToHouse(houseID, callback) {
         console.log("houseid"+ houseID);
         var db = this.openDB();
-        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, '["butter"]'], function(err) {
+        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, '[["asd","butter"]]'], function(err) {
             if(callback) {
                 callback();
             }
