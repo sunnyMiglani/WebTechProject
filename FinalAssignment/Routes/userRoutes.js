@@ -9,6 +9,9 @@ const jsPath = __dirname + '/../Public/Resources/Javascript/';
 var path = require('path');
 var bodyParser = require('body-parser');
 
+var activeFields = [];
+var links = [];
+var label = [];
 
 module.exports = function(app, db, hashPass) {
 
@@ -44,14 +47,21 @@ module.exports = function(app, db, hashPass) {
     app.get('/', sessionChecker, function(req, res) {
         res.render('home', {
             LoginOrAcc: '/account',
-            loginAccDisplay: "My Account"
+            loginAccDisplay: "My Account",
+            activeField: ["active", "inactive", "inactive", "inactive"],
+            links: ["/dashboard", "/about", "/dashboard", "/account"],
+            label: ["Home", "About", "Contact", "My Account"],
         });
     });
 
     app.get('/about', function (req, res) {  
         res.render('about', {
             LoginOrAcc: '/account',
-            loginAccDisplay: "My Account" });
+            loginAccDisplay: "My Account",
+            activeField: ["inactive", "active", "inactive", "inactive"],
+            links: ["/dashboard", "/about", "/dashboard", "/account"],
+            label: ["Home", "About", "Contact", "My Account"],
+         });
     });
 
     app.get('/dashboard', function(req, res) {
@@ -62,9 +72,11 @@ module.exports = function(app, db, hashPass) {
                 //if user does not belong to a house
                 if(returnedRow.houseID === 1) {
                     res.render('dashboard', {
-                        LoginOrAcc: '/account',
-                        loginAccDisplay: "My Account",
-                        dashView: 'partials/join_house.ejs'
+                        dashView: 'partials/join_house.ejs',
+                        cssFile: "join_house.css",
+                        activeField: ["active", "inactive", "inactive", "inactive"],
+                        links: ['/dashboard', '/about', '/dashboard', '/account'],
+                        label: ["Home", "About", "Contact", "My Account"],
                     });
                 }
                 //user belongs to a house
@@ -76,20 +88,22 @@ module.exports = function(app, db, hashPass) {
                             console.log("Shopping list = " + JSON.stringify(sList.sl));
                             console.log(JSON.parse(sList.sl));
                             res.render('dashboard', {
-                                LoginOrAcc: '/account',
-                                loginAccDisplay: "My Account",
+                                cssFile: "join_house.css",
+                                activeField: ["active", "inactive", "inactive", "inactive"],
+                                links: ['/dashboard', '/about', '/dashboard', '/account'],
+                                label: ["Home", "About", "Contact", "My Account"],
                                 dashView: 'partials/shopping.ejs',
                                 shopping: JSON.parse(sList.sl)
                             });
                         });
                     });
-                    
                     //get bills data
                     //get messages?
                     //insert data to pages
                 }
             });
-        } else {
+        } 
+        else {
             console.log("Dashboard: Not a session user");
             res.redirect('/');
         }
@@ -101,7 +115,10 @@ module.exports = function(app, db, hashPass) {
             console.log("Account: Is a session user");
             res.render('my_account', {
                 LoginOrAcc: '/account',
-                loginAccDisplay: "My Account"
+                loginAccDisplay: "My Account",
+                activeField: ["inactive", "inactive", "inactive", "active"],
+                links: ["/dashboard", "/about", "/dashboard", "/account"],
+                label: ["Home", "About", "Contact", "My Account"],
             });
         } else {
             console.log("Account: Not a session user");
@@ -167,6 +184,12 @@ module.exports = function(app, db, hashPass) {
     app.get('/my_account.js', function (req, res) {
         res.sendFile(path.resolve(jsPath + 'my_account.js'));
     });
+
+    app.get('/login.js', function (req, res) {
+        res.sendFile(path.resolve(jsPath + 'login.js'));
+    });
+
+
 
     ////////////////////////// Database/login requests ////////////////////
     app.post('/signup', function(req, res) {
