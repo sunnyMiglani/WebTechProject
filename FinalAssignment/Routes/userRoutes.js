@@ -9,9 +9,6 @@ const jsPath = __dirname + '/../Public/Resources/Javascript/';
 var path = require('path');
 var bodyParser = require('body-parser');
 
-var activeFields = [];
-var links = [];
-var label = [];
 
 module.exports = function(app, db, hashPass) {
 
@@ -45,13 +42,7 @@ module.exports = function(app, db, hashPass) {
 
     /////////////////////////// html files ////////////////////////////////
     app.get('/', sessionChecker, function(req, res) {
-        res.render('home', {
-            LoginOrAcc: '/account',
-            loginAccDisplay: "My Account",
-            activeField: ["active", "inactive", "inactive", "inactive"],
-            links: ["/dashboard", "/about", "/dashboard", "/account"],
-            label: ["Home", "About", "Contact", "My Account"],
-        });
+        res.render('home', JSONForVariables(req));
     });
 
     app.get('/about', function (req, res) {  
@@ -71,13 +62,7 @@ module.exports = function(app, db, hashPass) {
             db.getUserData(email, false, function(returnedRow) {
                 //if user does not belong to a house
                 if(returnedRow.houseID === 1) {
-                    res.render('dashboard', {
-                        dashView: 'partials/join_house.ejs',
-                        cssFile: "join_house.css",
-                        activeField: ["active", "inactive", "inactive", "inactive"],
-                        links: ['/dashboard', '/about', '/dashboard', '/account'],
-                        label: ["Home", "About", "Contact", "My Account"],
-                    });
+                    res.render('dashboard', JSONForVariables(req,0));
                 }
                 //user belongs to a house
                 else {
@@ -296,18 +281,56 @@ module.exports = function(app, db, hashPass) {
             }    
         });
     });
-
-
-    ////////////////////////// Helper callback funtions /////////////// 
+    
+    
+    ////////////////////////// Helper Funtions //////////////////////
     function joinGroup(houseName, email, req, res) {
         db.joinHouseGroup(houseName, email, function() {
             res.redirect('/dashboard');
         });   
     }
 
+
+    function JSONForVariables(req, pageID){
+        var jsonObj = {};
+        var loggedIn = (req.session.user && req.cookies.user_sid);
+        var labels = [];
+        var links = [];
+        var activeField = [];
+        if( !loggedIn || pageID == 0){
+            /* If the person is NOT logged in, return just the Home / About */
+            labels.push("Home","About");
+            links.push('dashboard','about');
+            activeField.push('active', 'inactive');
+
+            jsonObj.labels = labels;
+            jsonObj.links = links;
+            jsonObj.activeField = activeField;
+            
+            return jsonObj;
+        }
+        labels.push("Home","About", "My Account");
+        links.push('dashboard', 'about', 'account');
+        activeField.push('active', 'inactive', 'inactive');
+        jsonObj.labels = labels;
+        jsonObj.links = links;
+        jsonObj.activeField = activeField;
+
+        return jsonObj;
+
+    }
+    
     ////////////////////////// Error handling ////////////////////////
     app.use(function (req, res, next) {
         // res.status(404).sendFile(path.resolve(.... etc ))//send("Sorry that page doesn\'t exist");
         res.status(404).sendFile(path.resolve(htmlPath + '404.html'));
     });
+    
+    
+
+
 };
+
+    
+
+
