@@ -42,17 +42,11 @@ module.exports = function(app, db, hashPass) {
 
     /////////////////////////// html files ////////////////////////////////
     app.get('/', sessionChecker, function(req, res) {
-        res.render('home', JSONForVariables(req));
+        res.render('home', JSONForVariables(req, 1));
     });
 
     app.get('/about', function (req, res) {  
-        res.render('about', {
-            LoginOrAcc: '/account',
-            loginAccDisplay: "My Account",
-            activeField: ["inactive", "active", "inactive", "inactive"],
-            links: ["/dashboard", "/about", "/dashboard", "/account"],
-            label: ["Home", "About", "Contact", "My Account"],
-         });
+        res.render('about',JSONForVariables(req,2));
     });
 
     app.get('/dashboard', function(req, res) {
@@ -61,10 +55,11 @@ module.exports = function(app, db, hashPass) {
             var email = req.session.user.email;
             db.getUserData(email, false, function(returnedRow) {
                 //if user does not belong to a house
+                var jsonObj = JSONForVariables(req, 1);
+                jsonObj.dashView = 'partials/join_house.ejs'
                 if(returnedRow.houseID === 1) {
-                    res.render('dashboard', JSONForVariables(req,0));
+                    res.render('dashboard', jsonObj);
                 }
-                //user belongs to a house
                 else {
                     //get shopping data
                     db.getHouseIDFromUser(email, function(row) {
@@ -72,16 +67,13 @@ module.exports = function(app, db, hashPass) {
                         db.getShoppingListByHouseID(hid, function(sList) {
                             console.log("Shopping list = " + JSON.stringify(sList.sl));
                             console.log(JSON.parse(sList.sl));
-                            res.render('dashboard', {
-                                cssFile: "shopping.css",
-                                activeField: ["active", "inactive", "inactive", "inactive"],
-                                links: ['/dashboard', '/about', '/dashboard', '/account'],
-                                label: ["Home", "About", "Contact", "My Account"],
-                                dashView: 'partials/shopping.ejs',
-                                shopping: JSON.parse(sList.sl)
-                            });
+                            var normalJSON = JSONForVariables(req, 1); 
+                            normalJSON.dashView = 'partials/shopping.ejs';
+                            normalJSON.cssFile = "shopping.css";
+                            normalJSON.shopping = JSON.parse(sList.sl);
+                            res.render('dashboard', normalJSON);
                         });
-                    });
+                    }); 
                     //get bills data
                     //get messages?
                     //insert data to pages
@@ -98,15 +90,9 @@ module.exports = function(app, db, hashPass) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            res.render('my_account', {
-                LoginOrAcc: '/account',
-                loginAccDisplay: "My Account",
-                activeField: ["inactive", "inactive", "inactive", "active"],
-                links: ["/dashboard", "/about", "/dashboard", "/account"],
-                label: ["Home", "About", "Contact", "My Account"],
-            });
+            res.render('my_account', JSONForVariables(req, 3));
         } else {
-            console.log("Account: Not a session user");
+            console.log("Account: Not a session user"); 
             res.redirect('/');
         }
     });
@@ -311,7 +297,9 @@ module.exports = function(app, db, hashPass) {
         }
         labels.push("Home","About", "My Account");
         links.push('dashboard', 'about', 'account');
-        activeField.push('active', 'inactive', 'inactive');
+        activeField.push('inactive', 'inactive', 'inactive');
+        activeField[pageID-1] = 'active';
+
         jsonObj.labels = labels;
         jsonObj.links = links;
         jsonObj.activeField = activeField;
