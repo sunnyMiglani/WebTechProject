@@ -1,8 +1,7 @@
 <!-- views/partials/navbar.ejs  -->
 
 <ul>
-    <li><a class="active" href="/">Home</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="">Contact</a></li>
-    <li style="float:right"><a href= <%= LoginOrAcc %> > <%= loginAccDisplay %> </a></li>
+    <% for(var i=0; i < activeField.length ; i++) { %>
+    <li><a class= '<% activeField[i] %>' href= <%= links[i]%> > <%= label[i] %> </a></li>
+    <% } %>
 </ul> 

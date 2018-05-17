@@ -68,10 +68,11 @@ module.exports = function(app, db, hashPass) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Dashboard: Is a session user");
             res.render('dashboard', {
-                LoginOrAcc: '/account',
-                loginAccDisplay: "My Account",
                 dashView: 'partials/join_house.ejs',
-                cssFile: "join_house.css"  
+                cssFile: "join_house.css",  
+                activeField: ["active", "inactive", "inactive", "inactive"],
+                links: ["/dashboard", "/about", "/dashboard", "/account"],
+                label: ["Home", "About", "Contact", "My Account"]
             });
         } else {
             console.log("Dashboard: Not a session user");
