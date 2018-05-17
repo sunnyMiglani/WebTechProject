@@ -21,7 +21,7 @@ module.exports = function(app, db, hashPass) {
         if(req.secure){
             next();
         } else {
-            res.redirect('https://' + req.headers.host + ':3000' + req.url);
+            res.redirect('https://' + req.headers.host + ':443' + req.url);
         }
     });
 

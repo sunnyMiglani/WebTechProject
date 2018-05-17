@@ -13,8 +13,8 @@ const apps = configureExpress(db);
 const httpsApp = apps[0];
 const httpApp = apps[1];
 
-httpsApp.listen(3000, function() {
-    console.log('Example app listening on port 3000!');
+httpsApp.listen(443, function() {
+    console.log('Example app listening on port 443!');
 });
 
 httpApp.listen(80, function() {
