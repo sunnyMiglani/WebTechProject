@@ -90,7 +90,8 @@ module.exports = function(app, db, hashPass) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            res.render('my_account', JSONForVariables(req, 3));
+            var jsonObj = JSONForVariables(req,3);
+            res.render('my_account', jsonObj);
         } else {
             console.log("Account: Not a session user"); 
             res.redirect('/');
