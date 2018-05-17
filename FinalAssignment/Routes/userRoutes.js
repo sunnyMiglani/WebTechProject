@@ -254,6 +254,17 @@ module.exports = function(app, db, hashPass) {
         joinGroup(houseName, email, req, res);
     });
 
+    app.post('/addItem', function(req, res) {
+        var item = req.body.item;
+        var email = req.session.user.email;
+        db.getUserData(email, false, function(returnedRow) {
+            db.insertItemsToShoppingList(returnedRow.houseID, returnedRow.fname, item, function() {
+                console.log("Added new item");
+                res.redirect('/dashboard');
+            });
+        });
+    });
+
 
     app.get('/myaccountinfo', function(req,res) {
         var currentEmail = req.session.user.email;

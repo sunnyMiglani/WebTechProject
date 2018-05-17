@@ -131,7 +131,7 @@ class sqlDB {
     addShoppingListToHouse(houseID, callback) {
         console.log("houseid"+ houseID);
         var db = this.openDB();
-        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, '[["asd","butter"]]'], function(err) {
+        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, '[]'], function(err) {
             if(callback) {
                 callback();
             }
@@ -146,7 +146,7 @@ class sqlDB {
         this.closeDB(db);
     }
 
-    insertItemsToShoppingList(houseID, item, callback) {
+    insertItemsToShoppingList(houseID, fname, item, callback) {
         var db = this.openDB();
         db.all('SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?', [houseID], function(err, row) {
             console.log(row);
@@ -154,15 +154,26 @@ class sqlDB {
                 console.log(err.message);
             }
             else {
-                var currentList = row[0].sl;
-                currentList.push(item);
-                db.run('UPDATE Shopping SET ShoppingList = ? WHERE HouseID = ?');
-            }
-            if(callback) {
-                callback();
+                //insert to alphabetical order
+                var currentList = JSON.parse(row[0].sl);
+                var index = 0;
+                if(currentList.length == 0){ currentList.push([fname,item]);}
+
+                else {
+                    console.log(currentList[index]);
+                    while( index < currentList.length && currentList[index][0] < fname) {
+                        console.log("loop");
+                        index++;
+                    }
+                    currentList.splice(index, 0, [fname,item])
+                }
+                db.run('UPDATE Shopping SET ShoppingList = ? WHERE HouseID = ?', [JSON.stringify(currentList), houseID], function(err) {
+                    if(callback) {
+                        callback();
+                    }
+                });
             }
         });
-
         this.closeDB(db);
     } 
 
