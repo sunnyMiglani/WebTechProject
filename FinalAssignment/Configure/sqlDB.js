@@ -36,6 +36,9 @@ class sqlDB {
             db.run('CREATE TABLE IF NOT EXISTS HouseGroups(GroupID INTEGER PRIMARY KEY AUTOINCREMENT, HouseName TEXT UNIQUE NOT NULL)'); 
             db.run('CREATE TABLE IF NOT EXISTS users(Email TEXT NOT NULL, Pass TEXT NOT NULL, Fname TEXT NOT NULL,\
                     Lname TEXT NOT NULL, HouseID INTEGER NOT NULL, FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
+
+            db.run('CREATE TABLE IF NOT EXISTS Shopping(HouseID INTEGER PRIMARY KEY, ShoppingList TEXT,\
+                    FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
             
             //Add global house position if not set already
             db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', ['Global']);
@@ -43,10 +46,11 @@ class sqlDB {
         this.closeDB(db);
     }
 
+    //add a new house
     addHouseGroup(houseName, callback) {
         var db = this.openDB();
         db.serialize(function() {
-            db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', [houseName]);
+            db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', [houseName]); //FIXME: WIll not create houses with same name
             db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, row) {
                 if(err) {
                     console.log(err.message);
@@ -61,35 +65,32 @@ class sqlDB {
         this.closeDB(db);
     }
 
+
+
     //given a house name and a user to join the house
     joinHouseGroup(houseName, email, callback) {
         var db = this.openDB();
-            db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, retRow) {
-                if (err) {
-                    console.log(err.message);
-                }
-                else if (retRow && retRow.length > 0) {
-                    console.log("House found");
-                    console.log("the thing itself : "+retRow);
-                    console.log(JSON.stringify(retRow));
-                    console.log(JSON.stringify(retRow[0].gid));
-                    console.log(email);
-                    db.run('UPDATE users SET HouseID= ? WHERE email = ?', [retRow[0].gid, email], function(err) {
-                        if(err) {
-                            console.log(err.message);
-                        }
-                        if(callback) {
-                            callback(retRow);
-                        }
-                    });
-                }
-                else {
-                    console.log("House not found");
-                    if(callback){
-                        callback(undefined)
+        db.all('SELECT GroupID gid, HouseName houseName FROM HouseGroups WHERE HouseName = ?', [houseName], function(err, retRow) {
+            if (err) {
+                console.log(err.message);
+            }
+            else if (retRow && retRow.length > 0) {
+                db.run('UPDATE users SET HouseID= ? WHERE email = ?', [retRow[0].gid, email], function(err) {
+                    if(err) {
+                        console.log(err.message);
                     }
+                    if(callback) {
+                        callback(retRow);
+                    }
+                });
+            }
+            else {
+                console.log("House not found");
+                if(callback){
+                    callback(undefined)
                 }
-            });
+            }
+        });
         this.closeDB(db);
     }
 
@@ -108,48 +109,80 @@ class sqlDB {
         });
         this.closeDB(db);
     }
+
     //Find user from user table
-    findUser(email, callback) {
+    getUserData(email, requirePass, callback){
         var db = this.openDB();
-        let sqlQuery = 'SELECT Email email, Pass pass, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';
-        db.all(sqlQuery, [email], function(err, rows) {
-            if(err) {
+        var sqlQuery;
+        if(requirePass){ sqlQuery = 'SELECT Email email, Pass pass, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';}
+        else{ sqlQuery = 'SELECT Email email, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';}
+        this.queryWithEmailHelper(db, sqlQuery, email, callback);
+        this.closeDB(db);
+    }
+
+
+    getHouseIDFromUser(email, callback) {
+        var db = this.openDB();
+        let sqlQuery = 'SELECT HouseID houseID FROM users WHERE Email = ?';
+        this.queryWithEmailHelper(db, sqlQuery, email, callback);
+        this.closeDB(db)
+    }
+
+    //////////////////////////// Shopping ///////////////////////////////////////////////////////
+
+    addShoppingListToHouse(houseID, callback) {
+        var db = this.openDB();
+        db.run('INSERT INTO Shopping(HouseID, ShoppingList) VALUES(?,?)', [houseID, []]);
+        if(callback) {
+            callback();
+        }
+        this.closeDB(db);
+    }
+
+    getShoppingListByHouseID(houseID, callback) {
+        var db = this.openDB();
+        db.all('SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?', [houseID], function(err, row) {
+            console.log(row);
+            if (err) {
                 console.log(err.message);
-            }
-            else {
-                //callback with user object
-                if(rows[0] !== undefined) {
-                    if(callback) {
-                        callback(rows[0]);
-                    }
-                }
-                //callback with user not found
-                else {
-                    if(callback) {
-                        callback(undefined);
-                    }
-                }
             }
         });
         this.closeDB(db);
     }
 
-    getUserData(email, callback){
+    insertItemsToShoppingList(houseID, item, callback) {
         var db = this.openDB();
-        let sqlQuery = 'SELECT Email email, Fname fname, Lname lname, HouseID houseID FROM users WHERE Email = ?';
+        db.all('SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?', [houseID], function(err, row) {
+            console.log(row);
+            if (err) {
+                console.log(err.message);
+            }
+            else {
+                var currentList = row[0].sl;
+                currentList.push(item);
+                db.run('UPDATE Shopping SET ShoppingList = ? WHERE HouseID = ?');
+            }
+            if(callback) {
+                callback();
+            }
+        });
+
+        this.closeDB(db);
+    } 
+
+    //////////////////////////////// Helper functions ///////////////////////////////////////////
+
+    queryWithEmailHelper(db, sqlQuery, email, callback) {
         db.all(sqlQuery, [email], function (err, rows) {
             if (err) {
                 console.log(err.message);
             }
             else {
-                //callback with user object
                 if (rows[0] !== undefined) {
-                    console.log(`${rows[0].name} ${rows[0].pass}`); // TODO: Fix 
                     if (callback) {
                         callback(rows[0]);
                     }
                 }
-                //callback with user not found
                 else {
                     if (callback) {
                         callback(undefined);
@@ -158,6 +191,9 @@ class sqlDB {
             }
         });
     }
+
+
 }
+
 
 module.exports = sqlDB;

@@ -34,7 +34,6 @@ module.exports = function(app, db, hashPass) {
 
     var sessionChecker = function(req, res, next) {
         if (req.session.user && req.cookies.user_sid) {
-            console.log("user = " + JSON.stringify(req.session.user));
             res.redirect('/dashboard');
         } else {
             next();
@@ -49,15 +48,6 @@ module.exports = function(app, db, hashPass) {
         });
     });
 
-    app.get('/page2', function(req, res) {
-        res.sendFile(path.resolve(htmlPath + 'page2.html'));
-    });
-
-
-    app.get('/dashboardBody', function(req, res) {                  //TODO: finish to generate the dynamic stuff
-        res.sendFile(path.resolve(htmlPath + 'join_house.html'));
-    });
-
     app.get('/about', function (req, res) {  
         res.render('about', {
             LoginOrAcc: '/account',
@@ -67,10 +57,28 @@ module.exports = function(app, db, hashPass) {
     app.get('/dashboard', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Dashboard: Is a session user");
-            res.render('dashboard', {
-                LoginOrAcc: '/account',
-                loginAccDisplay: "My Account",
-                dashView: 'partials/join_house.ejs'
+            var email = req.session.user.email;
+            db.getUserData(email, false, function(returnedRow) {
+                //if user does not belong to a house
+                if(returnedRow.houseID === 1) {
+                    res.render('dashboard', {
+                        LoginOrAcc: '/account',
+                        loginAccDisplay: "My Account",
+                        dashView: 'partials/join_house.ejs'
+                    });
+                }
+                //user belongs to a house
+                else {
+                    //get shopping data
+                    res.render('dashboard', {
+                        LoginOrAcc: '/account',
+                        loginAccDisplay: "My Account",
+                        dashView: 'partials/join_house.ejs'
+                    });
+                    //get bills data
+                    //get messages?
+                    //insert data to pages
+                }
             });
         } else {
             console.log("Dashboard: Not a session user");
@@ -151,8 +159,6 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(jsPath + 'my_account.js'));
     });
 
-
-
     ////////////////////////// Database/login requests ////////////////////
     app.post('/signup', function(req, res) {
         if (!req.body) {
@@ -167,7 +173,8 @@ module.exports = function(app, db, hashPass) {
             if(pass === repsw) {
                 //salt and hash pass to save in Database
                 var hash = hashPass.hash(pass);
-                db.findUser(email, function(returnedRow) {
+                //get user data: false to not return password
+                db.getUserData(email, false, function(returnedRow) {
                     if(returnedRow !== undefined) {
                         console.log("User email already exists");
                         res.redirect('/');
@@ -197,7 +204,8 @@ module.exports = function(app, db, hashPass) {
             var email = req.body.uname; //TODO: change to body.email for consistency
             console.log(email);
             var psw = req.body.psw;
-            db.findUser(email, function(returnedRow) {
+            //get user data: true to return password
+            db.getUserData(email, true, function(returnedRow) {
                 if(returnedRow === undefined) {
                     console.log("User not found");
                     res.redirect('/');
@@ -225,6 +233,8 @@ module.exports = function(app, db, hashPass) {
         var email = req.session.user.email;
         db.addHouseGroup(houseName, function(row) {
             console.log("New house = " + JSON.stringify(row));
+            db.addShoppingListToHouse(row.gid);
+            console.log("added shopping list");
             joinGroup(houseName, email, req, res);
         });
     });
@@ -236,23 +246,15 @@ module.exports = function(app, db, hashPass) {
         joinGroup(houseName, email, req, res);
     });
 
-    /*
-    app.post('/joinuser', function(req, res) {
-
-    });
-     */
 
     app.get('/myaccountinfo', function(req,res) {
-        console.log("myAccountInfoStuff");
         var currentEmail = req.session.user.email;
-        db.getUserData(currentEmail , function(returnedRow) {
+        db.getUserData(currentEmail, false, function(returnedRow) {
             if(returnedRow == undefined){
                 console.log("User not found!");
                 res.redirect('/');
             }
             else{
-                console.log("found myAccountinfo!!");
-                console.log("Returned row : " + JSON.stringify(returnedRow));
                 res.status(200);
                 res.json(returnedRow);
             }    
