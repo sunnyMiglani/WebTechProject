@@ -6,5 +6,10 @@
         <% for(var i=0; i < shopping.length; i++) { %>
         <li><%= shopping[i][0] %> <%= shopping[i][1] %></li>
         <% } %>
+
+        <form action="/addItem" method="POST">
+            <input type="text" placeholder="Item needed" name="item" required>
+            <button type="submit" id="addItemButton" value="Submit">Add</button>
+        </form>
     </ul> 
 </div>
