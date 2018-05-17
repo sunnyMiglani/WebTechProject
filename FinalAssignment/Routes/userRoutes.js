@@ -48,7 +48,7 @@ module.exports = function(app, db, hashPass) {
             loginAccDisplay: "My Account",
             activeField: ["active", "inactive", "inactive", "inactive"],
             links: ["/dashboard", "/about", "/dashboard", "/account"],
-            label: ["Home", "About", "Contact", "My Account"]
+            label: ["Home", "About", "Contact", "My Account"],
         });
     });
 
@@ -65,9 +65,10 @@ module.exports = function(app, db, hashPass) {
         res.render('about', {
             LoginOrAcc: '/account',
             loginAccDisplay: "My Account",
-            activeField: ["active", "inactive", "inactive", "inactive"],
+            activeField: ["inactive", "active", "inactive", "inactive"],
             links: ["/dashboard", "/about", "/dashboard", "/account"],
-            label: ["Home", "About", "Contact", "My Account"] });
+            label: ["Home", "About", "Contact", "My Account"],
+         });
     });
 
     app.get('/dashboard', function(req, res) {
@@ -77,8 +78,8 @@ module.exports = function(app, db, hashPass) {
                 dashView: 'partials/join_house.ejs',
                 cssFile: "join_house.css",
                 activeField: ["active", "inactive", "inactive", "inactive"],
-                links: ["/dashboard", "/about", "/dashboard", "/account"],
-                label: ["Home", "About", "Contact", "My Account"]  
+                links: ['/dashboard', '/about', '/dashboard', '/account'],
+                label: ["Home", "About", "Contact", "My Account"],
             });
         } else {
             console.log("Dashboard: Not a session user");
@@ -93,9 +94,9 @@ module.exports = function(app, db, hashPass) {
             res.render('my_account', {
                 LoginOrAcc: '/account',
                 loginAccDisplay: "My Account",
-                activeField: ["active", "inactive", "inactive", "inactive"],
+                activeField: ["inactive", "inactive", "inactive", "active"],
                 links: ["/dashboard", "/about", "/dashboard", "/account"],
-                label: ["Home", "About", "Contact", "My Account"]
+                label: ["Home", "About", "Contact", "My Account"],
             });
         } else {
             console.log("Account: Not a session user");
