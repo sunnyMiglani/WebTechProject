@@ -154,8 +154,19 @@ class sqlDB {
                 console.log(err.message);
             }
             else {
+                //insert to alphabetical order
                 var currentList = JSON.parse(row[0].sl);
-                currentList.push([fname,item]);
+                var index = 0;
+                if(currentList.length == 0){ currentList.push([fname,item]);}
+
+                else {
+                    console.log(currentList[index]);
+                    while( index < currentList.length && currentList[index][0] < fname) {
+                        console.log("loop");
+                        index++;
+                    }
+                    currentList.splice(index, 0, [fname,item])
+                }
                 db.run('UPDATE Shopping SET ShoppingList = ? WHERE HouseID = ?', [JSON.stringify(currentList), houseID], function(err) {
                     if(callback) {
                         callback();
