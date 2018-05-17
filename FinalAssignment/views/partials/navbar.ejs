@@ -1,11 +1,10 @@
 <!-- views/partials/navbar.ejs  -->
 
-<ul>
+<div class="navBar">
     <% for(var i=0; i < activeField.length; i++) { %>
     <% if(i === activeField.length-1) { %>
     <li style="float:right"> <a class= <%= activeField[ i] %> href = <%= links[ i ]%> > <%= label[ i ] %> </a></li>
     <% } else {%>
     <li><a class= <%= activeField[i] %> href= <%= links[i]%> > <%= label[i] %> </a></li>
     <% } } %>
-
-</ul> 
+</div> 
