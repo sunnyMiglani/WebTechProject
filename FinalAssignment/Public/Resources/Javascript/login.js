@@ -82,7 +82,7 @@ window.onload = function() {
             both.classList.add("invalid");
             bothCorrect = false;
         }
-        var emailId = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z{2,}]/g;
+        var emailId = /[a-z0-9._%+-]+@[a-z0-9.]+.[a-z{2,}]/g;
         if (emailEnt.value.match(emailId)) {
             email.classList.remove("invalid");
             email.classList.add("valid");

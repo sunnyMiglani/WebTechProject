@@ -10,18 +10,23 @@ h1 {
 form {
     border: 3px solid;
     border-color: #264653;
+    border-radius: 6px;
 }
+
 
 section.left,section.right
 {
     width:44%;
     text-align: justify;
     background-color: #264653;
+    border-radius: 6px;
 }
+
 
 .loginContainer {
     margin-top: 8%;    
     background-color: #264653;
+    border-radius: 6px;
     
 }
 
@@ -128,6 +133,7 @@ div {
     position: relative;
     padding: 20px;
     margin-top: 10px;
+    line-height: 6%;
 }
 
 #requirements p {
