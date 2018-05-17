@@ -64,7 +64,10 @@ module.exports = function(app, db, hashPass) {
     app.get('/about', function (req, res) {  
         res.render('about', {
             LoginOrAcc: '/account',
-            loginAccDisplay: "My Account" });
+            loginAccDisplay: "My Account",
+            activeField: ["active", "inactive", "inactive", "inactive"],
+            links: ["/dashboard", "/about", "/dashboard", "/account"],
+            label: ["Home", "About", "Contact", "My Account"] });
     });
 
     app.get('/dashboard', function(req, res) {
@@ -72,8 +75,10 @@ module.exports = function(app, db, hashPass) {
             console.log("Dashboard: Is a session user");
             res.render('dashboard', {
                 dashView: 'partials/join_house.ejs',
-                cssFile: "join_house.css",  
-                
+                cssFile: "join_house.css",
+                activeField: ["active", "inactive", "inactive", "inactive"],
+                links: ["/dashboard", "/about", "/dashboard", "/account"],
+                label: ["Home", "About", "Contact", "My Account"]  
             });
         } else {
             console.log("Dashboard: Not a session user");
@@ -87,7 +92,10 @@ module.exports = function(app, db, hashPass) {
             console.log("Account: Is a session user");
             res.render('my_account', {
                 LoginOrAcc: '/account',
-                loginAccDisplay: "My Account"
+                loginAccDisplay: "My Account",
+                activeField: ["active", "inactive", "inactive", "inactive"],
+                links: ["/dashboard", "/about", "/dashboard", "/account"],
+                label: ["Home", "About", "Contact", "My Account"]
             });
         } else {
             console.log("Account: Not a session user");
@@ -152,6 +160,10 @@ module.exports = function(app, db, hashPass) {
 
     app.get('/my_account.js', function (req, res) {
         res.sendFile(path.resolve(jsPath + 'my_account.js'));
+    });
+
+    app.get('/login.js', function (req, res) {
+        res.sendFile(path.resolve(jsPath + 'login.js'));
     });
 
 

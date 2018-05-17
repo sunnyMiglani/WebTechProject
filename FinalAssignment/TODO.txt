@@ -1,0 +1,20 @@
+Houses
+- who else in the house, first and last names
+- House details --> in "my_account" page? 
+	1) Address
+	2) Shared Notes.txt?
+
+Shopping
+- Shared list per house
+- Possible : Who added the things to the list
+
+Bills
+- Shared Bills 
+- Per person bill
+
+Calendar
+- Visual based? (Try getting google cal?)
+- Anyone can add things to calendar
+- Anyone can see
+
+

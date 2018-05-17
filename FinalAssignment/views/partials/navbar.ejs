@@ -1,7 +1,8 @@
 <!-- views/partials/navbar.ejs  -->
 
 <ul>
-    <% for(var i=0; i < activeField.length ; i++) { %>
-    <li><a class= '<% activeField[i] %>' href= <%= links[i]%> > <%= label[i] %> </a></li>
+    <% for(var i=0; i < activeField.length-1; i++) { %>
+    <li><a class= <% activeField[i] %> href= <%= links[i]%> > <%= label[i] %> </a></li>
     <% } %>
+    <li style="float:right "><a class= <% activeField[i] %> href = <%= links[i]%> > <%= label[i] %> </a></li>
 </ul> 
