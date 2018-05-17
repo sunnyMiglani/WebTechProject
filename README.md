@@ -48,5 +48,5 @@ https://www.codementor.io/emjay/how-to-build-a-simple-session-based-authenticati
 
 -- [Made a key and cert using this](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
 
--- [Password hash] (
+-- [Password hash](
 https://ciphertrick.com/2016/01/18/salt-hash-passwords-using-nodejs-crypto/)

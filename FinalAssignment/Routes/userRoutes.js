@@ -280,6 +280,16 @@ module.exports = function(app, db, hashPass) {
             }    
         });
     });
+
+    app.get('/logout', function(res,req) {
+        if (req.session.user && req.cookies.user_sid) {
+            console.log("Tried to Logout!! ");
+            res.clearCookie('user_sid');
+            res.redirect('/');
+        } else {
+            res.redirect('/');
+        }
+    });
     
     
     ////////////////////////// Helper Funtions //////////////////////
