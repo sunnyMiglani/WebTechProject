@@ -57,6 +57,7 @@ module.exports = function(app, db, hashPass) {
                 //if user does not belong to a house
                 var jsonObj = JSONForVariables(req, 1);
                 jsonObj.dashView = 'partials/join_house.ejs'
+                jsonObj.cssFile='join_house.css';
                 if(returnedRow.houseID === 1) {
                     res.render('dashboard', jsonObj);
                 }
