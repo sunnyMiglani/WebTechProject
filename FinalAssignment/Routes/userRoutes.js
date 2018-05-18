@@ -212,6 +212,15 @@ module.exports = function(app, db, hashPass) {
         });
     });
 
+    app.delete('/deleteShoppingItem', function(req, res) {
+        var item = req.body.item;
+        var email = req.session.user.email;
+        db.getUserData(email, false, function(returnedRow) {
+            db.deleteItemFromShoppingList(returnedRow[0].houseID, item, function() {
+                res.sendStatus(200);
+            });
+        });
+    });
 
     app.get('/myaccountinfo', function(req,res) {
         var currentEmail = req.session.user.email;
@@ -235,8 +244,7 @@ module.exports = function(app, db, hashPass) {
             } else {
                 res.redirect('/');
             }
-    });
-    
+    });    
     
     ////////////////////////// Helper Funtions //////////////////////
     function joinGroup(houseName, email, req, res) {
