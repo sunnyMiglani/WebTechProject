@@ -1,10 +1,37 @@
 .plainWordsBackground{
-    background-color:  aliceblue;
+    background-color:  rgb(250, 250, 186);
     margin: auto;
     color: #264653;
     width: 30%;
     padding: 10px;
     margin-top: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     border-radius: 12px;
     font-size: x-large;
+}
+
+div.shopItemContainer {
+    margin: 2%;
+    padding: 1%;
+    border: 2px;
+    border-radius: 25px;
+    background-color: beige;
+    width:30%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.shopItem {
+    padding: 1%;
+    /* background-color: beige; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    width: auto;
+    border-bottom: 2px black solid;
+}
+
+form {
+    border: 0px;
+    padding: auto;
+    align-content: center;
+    box-sizing: border-box;
 }

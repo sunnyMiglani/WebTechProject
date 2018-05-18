@@ -6,10 +6,18 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Homiezz</title>
-
-        <link href="basicLayout.css" rel="stylesheet" type="text/css" />
-        <link href= <%= cssFile %> rel="stylesheet" type="text/css"/>
+        <link href= "basicLayout.css" rel="stylesheet" type="text/css"/>
         
+        <% for(var i=0; i < cssFiles.length; i++) { %>
+        <link href= <%- cssFiles[i] %> rel="stylesheet" type="text/css"/>
+        
+        <% } %> 
+
+        <% for(var i=0; i < javaScriptFiles.length; i++) { %>
+        <script type="text/javascript" src= <%- javaScriptFiles[i] %> ></script>
+        <% } %> 
+        
+
     </head>
     <body>
         <%- include('partials/navbar.ejs') %>

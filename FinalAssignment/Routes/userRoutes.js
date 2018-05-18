@@ -56,8 +56,8 @@ module.exports = function(app, db, hashPass) {
             db.getUserData(email, false, function(returnedRow) {
                 //if user does not belong to a house
                 var jsonObj = JSONForVariables(req, 1);
+                jsonObj.cssFiles =['join_house.css'];
                 jsonObj.dashView = ['partials/join_house.ejs'];
-                jsonObj.cssFile='join_house.css';
                 if(returnedRow[0].houseID === 1) {
                     res.render('dashboard', jsonObj);
                 }
@@ -69,7 +69,8 @@ module.exports = function(app, db, hashPass) {
                             getFlatmates(email, function(houseMembers) {
                                 var normalJSON = JSONForVariables(req, 1); 
                                 normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs'];
-                                normalJSON.cssFile = "shopping.css";
+                                normalJSON.cssFiles = ["shopping.css", "house_members.css"];
+                                normalJSON.javaScriptFiles = ["shopping.js"];
                                 normalJSON.shopping = JSON.parse(sList[0].sl);
                                 normalJSON.houseMembers = houseMembers;
                                 res.render('dashboard', normalJSON);
@@ -112,6 +113,10 @@ module.exports = function(app, db, hashPass) {
 
     app.get('/login.js', function (req, res) {
         res.sendFile(path.resolve(jsPath + 'login.js'));
+    });
+
+    app.get('/shopping.js', function (req, res) {
+        res.sendFile(path.resolve(jsPath + 'shopping.js'));
     });
 
     ////////////////////////// Database/login requests ////////////////////
@@ -253,6 +258,7 @@ module.exports = function(app, db, hashPass) {
         var links = [];
         var activeField = [];
         var numberOfRights = 1;
+        jsonObj.javaScriptFiles = [];
         if( !loggedIn || pageID == 0){
             /* If the person is NOT logged in, return just the Home / About */
             labels.push("Home","About");
@@ -292,7 +298,6 @@ module.exports = function(app, db, hashPass) {
     
     ////////////////////////// Error handling ////////////////////////
     app.use(function (req, res, next) {
-        // res.status(404).sendFile(path.resolve(.... etc ))//send("Sorry that page doesn\'t exist");
         res.status(404).sendFile(path.resolve(htmlPath + '404.html'));
     });
     

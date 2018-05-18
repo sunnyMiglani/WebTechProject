@@ -1,27 +1,16 @@
 <!-- views/partials/shopping.ejs  -->
 
+
 <div class="plainWordsBackground">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <ul>
-    <div class=shopItemContainer>
-        <% for(var i=0; i < shopping.length; i++) { %>
-        <div class=row>
-            <div class=shopItem>
 
-                    <li><%= shopping[i][0] %>: <%= shopping[i][1] %> </li>
-            </div>
-            <!-- <button class=shopButton><i class="fa fa-trash"></i></button> -->
+
+    <% for(var i=0; i < shopping.length; i++) { %>
+        <div class="shopItem">
+                <li> <%= shopping[i][0] %>: <%= shopping[i][1] %> </li>
         </div>  
-
-       
-
-
-        <% } %>
-    </div>
-        <form action="/addItem" method="POST">
-            <input type="text" placeholder="Item needed" name="item" required>
-            <button type="submit" id="addItemButton" value="Submit">Add</button>
-            
-        </form>
-    </ul> 
+    <% } %>
+    <form action="/addItem" method="POST">
+        <input type="text" placeholder="Item needed" name="item" required>
+        <button type="submit" id="addItemButton" value="Submit">Add</button>
+    </form>
 </div>

@@ -53,33 +53,6 @@ li a:hover:not(.active) {
 }
 
 
-div.shopItemContainer {
-    margin: 2%;
-    padding: 1%;
-    border: 2%;
-    border-radius: 25px;
-    background-color: beige;
-    width:20%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-div.shopItem {
-    border-radius: 25px;
-    margin: 2%;
-    border: 2%;
-    padding: 2%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 70%;
-}
-
-.shopButton {
-
-    width: 10%;
-    color: black;
-    float: right;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 /* Set a style for all buttons */
 button {
     background-color: #e76f51;
