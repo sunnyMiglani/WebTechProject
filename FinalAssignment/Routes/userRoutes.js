@@ -114,8 +114,6 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(jsPath + 'login.js'));
     });
 
-
-
     ////////////////////////// Database/login requests ////////////////////
     app.post('/signup', function(req, res) {
         if (!req.body) {
@@ -225,7 +223,7 @@ module.exports = function(app, db, hashPass) {
             else{
                 res.status(200);
                 res.json(returnedRow);
-            }    
+            }
         });
     });
 

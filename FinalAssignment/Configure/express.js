@@ -33,7 +33,7 @@ module.exports = function(db) {
     }));
 
     app.use(expressConf.static(__dirname + '/../Public/Resources/Images'));
-    app.use(expressConf.static(__dirname + '/../Public/Resources/Stylesheets'));
+    app.use(expressConf.static(__dirname + '/../Public/Resources/CSS'));
     require(path.resolve(__dirname + '/../Routes/userRoutes.js'))(app, db, hashPass);
     var httpsServer = https.createServer(credentials, app);    
     var httpServer = http.createServer(app);
