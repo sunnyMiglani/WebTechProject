@@ -2,7 +2,7 @@
 
 <div class="navBar">
     <% for(var i=0; i < activeField.length; i++) { %>
-    <% if(i === activeField.length-1) { %>
+    <% if(i >= numberOfRight) { %>
     <li style="float:right"> <a class= <%= activeField[ i] %> href = <%= links[ i ]%> > <%= labels[ i ] %> </a></li>
     <% } else {%>
     <li><a class= <%= activeField[i] %> href= <%= links[i]%> > <%= labels[i] %> </a></li>

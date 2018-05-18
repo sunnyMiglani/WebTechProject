@@ -91,7 +91,7 @@ module.exports = function(app, db, hashPass) {
     app.get('/account', function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
             console.log("Account: Is a session user");
-            var jsonObj = JSONForVariables(req,3);
+            var jsonObj = JSONForVariables(req,4);
             res.render('my_account', jsonObj);
         } else {
             console.log("Account: Not a session user"); 
@@ -290,6 +290,7 @@ module.exports = function(app, db, hashPass) {
         var labels = [];
         var links = [];
         var activeField = [];
+        var numberOfRights = 1;
         if( !loggedIn || pageID == 0){
             /* If the person is NOT logged in, return just the Home / About */
             labels.push("Home","About");
@@ -299,18 +300,20 @@ module.exports = function(app, db, hashPass) {
             jsonObj.labels = labels;
             jsonObj.links = links;
             jsonObj.activeField = activeField;
+            jsonObj.numberOfRight = 1;
+            
             
             return jsonObj;
         }
-        labels.push("Home","About", "My Account");
-        links.push('dashboard', 'about', 'account');
-        activeField.push('inactive', 'inactive', 'inactive');
+        labels.push("Home","About", "Logout", "My Account");
+        links.push('dashboard', 'about', 'logout' ,'account');
+        activeField.push('inactive', 'inactive','inactive', 'inactive');
         activeField[pageID-1] = 'active';
 
         jsonObj.labels = labels;
         jsonObj.links = links;
         jsonObj.activeField = activeField;
-
+        jsonObj.numberOfRight = 2;
         return jsonObj;
 
     }
