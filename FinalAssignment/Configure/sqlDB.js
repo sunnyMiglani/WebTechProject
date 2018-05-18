@@ -182,6 +182,33 @@ class sqlDB {
         this.closeDB(db);
     } 
 
+    deleteItemFromShoppingList(houseID, item, callback) {
+        var db = this.openDB();
+        var sqlQuery = 'SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?';
+        this.generalQueryHelper(db, sqlQuery, houseID, function(rows) {
+            var currentList = JSON.parse(row[0].sl);
+            for(var i = 0; i < currentList.length; i++) {
+                if(currentList[i][0] === item[0] && currentList[i][1] === item[1]) {
+                    currentList.splice(i,1);
+                    break;
+                }
+            }
+            if(callback) {
+                callback();
+            }
+        });
+        this.closeDB(db);
+    }
+
+    //////////////////////////////// Bills /////////////////////////////////////////////////////
+
+    createTableOfBills(HouseID) {
+        var db = this.openDB();
+        
+        this.closeDB(db);
+    }
+
+
     //////////////////////////////// Helper functions ///////////////////////////////////////////
 
     generalQueryHelper(db, sqlQuery, queryReq, callback) {
