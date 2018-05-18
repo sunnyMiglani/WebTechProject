@@ -1,6 +1,7 @@
-.plainWordsBackground{
+.shoppingListBackground{
     background-color:  rgb(250, 250, 186);
     margin: auto;
+    float: right;
     color: #264653;
     width: 30%;
     padding: 10px;
