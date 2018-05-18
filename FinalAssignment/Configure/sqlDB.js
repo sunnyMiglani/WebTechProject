@@ -158,7 +158,6 @@ class sqlDB {
                 var currentList = JSON.parse(row[0].sl);
                 var index = 0;
                 if(currentList.length == 0){ currentList.push([fname,item]);}
-
                 else {
                     console.log(currentList[index]);
                     while( index < currentList.length && currentList[index][0] < fname) {
