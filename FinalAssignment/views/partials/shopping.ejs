@@ -3,14 +3,25 @@
 <div class="plainWordsBackground">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <ul>
+    <div class=shopItemContainer>
         <% for(var i=0; i < shopping.length; i++) { %>
-        <li><%= shopping[i][0] %>: <%= shopping[i][1] %></li>
-        <% } %>
+        <div class=row>
+            <div class=shopItem>
 
+                    <li><%= shopping[i][0] %>: <%= shopping[i][1] %> </li>
+            </div>
+            <!-- <button class=shopButton><i class="fa fa-trash"></i></button> -->
+        </div>  
+
+       
+
+
+        <% } %>
+    </div>
         <form action="/addItem" method="POST">
             <input type="text" placeholder="Item needed" name="item" required>
             <button type="submit" id="addItemButton" value="Submit">Add</button>
-            <p><button class="w3-btn w3-orange w3-xlarge"><i class="fa fa-trash"></i></button></p>
+            
         </form>
     </ul> 
 </div>
