@@ -127,28 +127,7 @@ module.exports = function(app, db, hashPass) {
     app.get('/shopping.css', function (req, res) {
         res.sendFile(path.resolve(cssPath + 'shopping.css'));
     });
-
-    /////////////////////////// image files ///////////////////////////////
-    app.get('/avatar.png', function(req, res) {
-        res.sendFile(path.resolve(publicRes + 'Images/avatar.png'));
-    });
-    app.get('/horsie.jpg', function (req, res) {
-        res.sendFile(path.resolve(publicRes + 'Images/horsie.jpg'));
-    });
-
-    app.get('/houses.jpg', function (req, res) {
-        res.sendFile(path.resolve(publicRes + 'Images/houses.jpg'));
-    });
-    app.get('/carie.jpg', function (req, res) {
-        res.sendFile(path.resolve(publicRes + 'Images/carie.jpg'));
-    });
-    app.get('/404.png', function (req, res) {
-        res.sendFile(path.resolve(publicRes + 'Images/houseEdited.png'));
-    }); 
-    app.get('/newhouses.jpg', function (req, res) {
-        res.sendFile(path.resolve(publicRes + 'Images/newhouses.jpg'));
-    });
-
+    
     ///////////////////////////// js files ////////////////////////////////
     app.get('/Resources/home.js', function(req, res) {
         res.sendFile(path.resolve(jsPath + 'home.js'));
