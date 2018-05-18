@@ -56,28 +56,26 @@ module.exports = function(app, db, hashPass) {
             db.getUserData(email, false, function(returnedRow) {
                 //if user does not belong to a house
                 var jsonObj = JSONForVariables(req, 1);
-                jsonObj.dashView = 'partials/join_house.ejs'
+                jsonObj.dashView = ['partials/join_house.ejs'];
                 jsonObj.cssFile='join_house.css';
-                if(returnedRow.houseID === 1) {
+                if(returnedRow[0].houseID === 1) {
                     res.render('dashboard', jsonObj);
                 }
                 else {
                     //get shopping data
                     db.getHouseIDFromUser(email, function(row) {
-                        var hid = row.houseID;
+                        var hid = row[0].houseID;
                         db.getShoppingListByHouseID(hid, function(sList) {
-                            console.log("Shopping list = " + JSON.stringify(sList.sl));
-                            console.log(JSON.parse(sList.sl));
-                            var normalJSON = JSONForVariables(req, 1); 
-                            normalJSON.dashView = 'partials/shopping.ejs';
-                            normalJSON.cssFile = "shopping.css";
-                            normalJSON.shopping = JSON.parse(sList.sl);
-                            res.render('dashboard', normalJSON);
+                            getFlatmates(email, function(houseMembers) {
+                                var normalJSON = JSONForVariables(req, 1); 
+                                normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs'];
+                                normalJSON.cssFile = "shopping.css";
+                                normalJSON.shopping = JSON.parse(sList[0].sl);
+                                normalJSON.houseMembers = houseMembers;
+                                res.render('dashboard', normalJSON);
+                            });
                         });
                     }); 
-                    //get bills data
-                    //get messages?
-                    //insert data to pages
                 }
             });
         } 
@@ -99,35 +97,6 @@ module.exports = function(app, db, hashPass) {
         }
     });
 
-    ////////////////////////// css files //////////////////////////////////
-    app.get('/basicLayout.css', function(req, res) {
-        res.sendFile(path.resolve(cssPath + 'basicLayout.css'));
-    });
-
-    app.get('/home.css', function(req, res) {
-        res.sendFile(path.resolve(cssPath + 'home.css'));
-    });
-
-    app.get('/about.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'about.css'));
-    });
-
-    app.get('/404.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + '404.css'));
-    });
-
-    app.get('/my_account.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'my_account.css'));
-    }); 
-    
-    app.get('/join_house.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'join_house.css'));
-    });
-
-    app.get('/shopping.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'shopping.css'));
-    });
-    
     ///////////////////////////// js files ////////////////////////////////
     app.get('/Resources/home.js', function(req, res) {
         res.sendFile(path.resolve(jsPath + 'home.js'));
@@ -145,8 +114,6 @@ module.exports = function(app, db, hashPass) {
         res.sendFile(path.resolve(jsPath + 'login.js'));
     });
 
-
-
     ////////////////////////// Database/login requests ////////////////////
     app.post('/signup', function(req, res) {
         if (!req.body) {
@@ -163,7 +130,7 @@ module.exports = function(app, db, hashPass) {
                 var hash = hashPass.hash(pass);
                 //get user data: false to not return password
                 db.getUserData(email, false, function(returnedRow) {
-                    if(returnedRow !== undefined) {
+                    if(returnedRow[0] !== undefined) {
                         console.log("User email already exists");
                         res.redirect('/');
                     }
@@ -199,7 +166,7 @@ module.exports = function(app, db, hashPass) {
                     res.redirect('/');
                 }
                 //hash pass and verify 
-                else if(hashPass.verify(psw,returnedRow.pass)) {
+                else if(hashPass.verify(psw,returnedRow[0].pass)) {
                     console.log("User logged in");
                     req.session.user = {email};
                     res.redirect('/dashboard');
@@ -238,7 +205,7 @@ module.exports = function(app, db, hashPass) {
         var item = req.body.item;
         var email = req.session.user.email;
         db.getUserData(email, false, function(returnedRow) {
-            db.insertItemsToShoppingList(returnedRow.houseID, returnedRow.fname, item, function() {
+            db.insertItemsToShoppingList(returnedRow[0].houseID, returnedRow[0].fname, item, function() {
                 console.log("Added new item");
                 res.redirect('/dashboard');
             });
@@ -256,12 +223,11 @@ module.exports = function(app, db, hashPass) {
             else{
                 res.status(200);
                 res.json(returnedRow);
-            }    
+            }
         });
     });
 
     app.get('/logout', function(req,res) {
-        if(req.session){
             if (req.session.user && req.cookies.user_sid) {
                 console.log("Tried to Logout!! ");
                 res.clearCookie('user_sid');
@@ -269,10 +235,6 @@ module.exports = function(app, db, hashPass) {
             } else {
                 res.redirect('/');
             }
-        }
-        else {
-            res.redirect('/');
-        }
     });
     
     
@@ -316,6 +278,16 @@ module.exports = function(app, db, hashPass) {
         jsonObj.numberOfRight = 2;
         return jsonObj;
 
+    }
+
+    function getFlatmates(email, callback) {
+        db.getHouseIDFromUser(email, function(rows) {
+            db.getUsersFromHouseID(rows[0].houseID, function(userRows) {
+                if(callback) {
+                    callback(userRows);
+                }
+            });
+        })
     }
     
     ////////////////////////// Error handling ////////////////////////
