@@ -13,8 +13,9 @@
     </head>
     <body>
         <%- include('partials/navbar.ejs') %>
-        
-        <%- include(dashView) %>
+        <% for(var i=0; i < dashView.length; i++) { %>
+            <%- include(dashView[i]) %>
+        <% } %>
     </body>
 
     <footer>
