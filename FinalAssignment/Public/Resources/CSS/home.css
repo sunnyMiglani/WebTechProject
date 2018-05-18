@@ -33,13 +33,11 @@ section.left,section.right
 .left
 {
     float: left;
-    margin: 0 1% 0 2%;
 }
 
 .right
 {
     float: right;
-    margin:0 2% 0 1%;
 }
 
 /* Full-width inputs */

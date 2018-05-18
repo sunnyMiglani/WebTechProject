@@ -263,7 +263,7 @@ module.exports = function(app, db, hashPass) {
             /* If the person is NOT logged in, return just the Home / About */
             labels.push("Home","About");
             links.push('dashboard','about');
-            activeField.push('inactive', 'inactive');
+            activeField.push('active', 'inactive');
 
             jsonObj.labels = labels;
             jsonObj.links = links;

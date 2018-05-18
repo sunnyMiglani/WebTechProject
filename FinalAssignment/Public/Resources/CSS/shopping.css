@@ -3,13 +3,12 @@
     margin: auto;
     float: right;
     color: #264653;
-    width: 30%;
+    width: auto;
     padding: 10px;
     margin-top: 10%;
-    padding-top: 2%;
     padding-bottom: 2%;
     border-radius: 12px;
-    font-size: x-large;
+    font-size: larger;
 }
 
 div.shopItemContainer {
