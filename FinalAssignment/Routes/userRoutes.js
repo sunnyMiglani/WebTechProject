@@ -67,13 +67,17 @@ module.exports = function(app, db, hashPass) {
                         var hid = row[0].houseID;
                         db.getShoppingListByHouseID(hid, function(sList) {
                             getFlatmates(email, function(houseMembers) {
-                                var normalJSON = JSONForVariables(req, 1); 
-                                normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs'];
-                                normalJSON.cssFiles = ["shopping.css", "house_members.css"];
-                                normalJSON.javaScriptFiles = ["shopping.js"];
-                                normalJSON.shopping = JSON.parse(sList[0].sl);
-                                normalJSON.houseMembers = houseMembers;
-                                res.render('dashboard', normalJSON);
+                                db.getBillsForHouse(hid, function(bills) {
+                                    console.log(JSON.stringify(bills));
+                                    var normalJSON = JSONForVariables(req, 1); 
+                                    normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs', 'partials/bills.ejs'];
+                                    normalJSON.cssFiles = ["shopping.css", "house_members.css"];
+                                    normalJSON.javaScriptFiles = ["shopping.js"];
+                                    normalJSON.shopping = JSON.parse(sList[0].sl);
+                                    normalJSON.houseMembers = houseMembers;
+                                    normalJSON.bills = bills
+                                    res.render('dashboard', normalJSON);
+                                })
                             });
                         });
                     }); 
@@ -120,6 +124,7 @@ module.exports = function(app, db, hashPass) {
     });
 
     ////////////////////////// Database/login requests ////////////////////
+    /////// account
     app.post('/signup', function(req, res) {
         if (!req.body) {
             res.sendStatus(400);
@@ -183,8 +188,7 @@ module.exports = function(app, db, hashPass) {
             });
         }
     });
-
-
+    /////// setup house
     app.post('/createhouse', function(req, res) {
         if (!req.body) {
             res.sendStatus(400);
@@ -206,6 +210,7 @@ module.exports = function(app, db, hashPass) {
         joinGroup(houseName, email, req, res);
     });
 
+    //////// shopping
     app.post('/addItem', function(req, res) {
         var item = req.body.item;
         var email = req.session.user.email;
@@ -226,7 +231,20 @@ module.exports = function(app, db, hashPass) {
             });
         });
     });
+    /////// Bills
 
+    app.post('/addBill', function(req, res) {
+        var date = req.body.date;
+        var amount = req.body.amount;
+        var email = req.session.user.email;
+        db.getUserData(email, false, function(returnedRow) {
+            db.addBillToHouse(returnedRow[0].houseID, date, amount, function() {
+                res.redirect('/dashboard');
+            });
+        });
+    });
+
+    /////// extra account funcs
     app.get('/myaccountinfo', function(req,res) {
         var currentEmail = req.session.user.email;
         db.getUserData(currentEmail, false, function(returnedRow) {
