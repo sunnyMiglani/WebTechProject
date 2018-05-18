@@ -67,7 +67,6 @@ module.exports = function(app, db, hashPass) {
                         var hid = row[0].houseID;
                         db.getShoppingListByHouseID(hid, function(sList) {
                             getFlatmates(email, function(houseMembers) {
-                                
                                 var normalJSON = JSONForVariables(req, 1); 
                                 normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs'];
                                 normalJSON.cssFile = "shopping.css";
@@ -96,35 +95,6 @@ module.exports = function(app, db, hashPass) {
             console.log("Account: Not a session user"); 
             res.redirect('/');
         }
-    });
-
-    ////////////////////////// css files //////////////////////////////////
-    app.get('/basicLayout.css', function(req, res) {
-        res.sendFile(path.resolve(cssPath + 'basicLayout.css'));
-    });
-
-    app.get('/home.css', function(req, res) {
-        res.sendFile(path.resolve(cssPath + 'home.css'));
-    });
-
-    app.get('/about.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'about.css'));
-    });
-
-    app.get('/404.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + '404.css'));
-    });
-
-    app.get('/my_account.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'my_account.css'));
-    }); 
-    
-    app.get('/join_house.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'join_house.css'));
-    });
-
-    app.get('/shopping.css', function (req, res) {
-        res.sendFile(path.resolve(cssPath + 'shopping.css'));
     });
 
     ///////////////////////////// js files ////////////////////////////////
