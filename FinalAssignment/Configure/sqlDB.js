@@ -126,6 +126,13 @@ class sqlDB {
         this.closeDB(db)
     }
 
+    getUsersFromHouseID(houseID, callback) {
+        var db = this.openDB();
+        let sqlQuery = 'SELECT Fname fname, Lname lname FROM users WHERE houseID = ?';
+        this.generalQueryHelper(db, sqlQuery, houseID, callback);
+        this.closeDB(db);
+    }
+
     //////////////////////////// Shopping ///////////////////////////////////////////////////////
 
     addShoppingListToHouse(houseID, callback) {
@@ -149,7 +156,6 @@ class sqlDB {
     insertItemsToShoppingList(houseID, fname, item, callback) {
         var db = this.openDB();
         db.all('SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?', [houseID], function(err, row) {
-            console.log(row);
             if (err) {
                 console.log(err.message);
             }
@@ -185,7 +191,7 @@ class sqlDB {
             }
             else {
                 if (callback) {
-                    callback(rows[0]);
+                    callback(rows);
                 }
             }
         });
