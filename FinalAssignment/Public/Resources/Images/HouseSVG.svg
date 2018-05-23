@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg4071"
+   width="800"
+   height="625.33331"
+   viewBox="0 0 800 625.33331"
+   sodipodi:docname="HouseSVG.svg"
+   inkscape:version="0.92.3 (unknown)">
+  <metadata
+     id="metadata4077">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4075">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 312.66665 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="800 : 312.66665 : 1"
+       inkscape:persp3d-origin="400 : 208.44444 : 1"
+       id="perspective4115" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview4073"
+     showgrid="false"
+     inkscape:zoom="2"
+     inkscape:cx="537.0444"
+     inkscape:cy="355.09714"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4071" />
+  <rect
+     id="rect4117"
+     width="371.88959"
+     height="274.81668"
+     x="194.90558"
+     y="236.23941" />
+  <rect
+     style="fill:#ffffff;stroke-width:1.12603188"
+     id="rect4119"
+     width="79.022301"
+     height="127.32463"
+     x="426.53885"
+     y="377.38089" />
+  <path
+     sodipodi:type="star"
+     style="fill:#000000"
+     id="path4127"
+     sodipodi:sides="3"
+     sodipodi:cx="-252.35548"
+     sodipodi:cy="-43.483654"
+     sodipodi:r1="108.31794"
+     sodipodi:r2="54.050652"
+     sodipodi:arg1="-0.51992613"
+     sodipodi:arg2="0.50112424"
+     inkscape:flatsided="false"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="m -158.35112,-97.297743 -46.59962,79.780662 -47.80256,82.350636 -45.79227,-80.246781 -47.41646,-82.573548 92.39188,0.466118 z"
+     inkscape:transform-center-x="19.980228"
+     inkscape:transform-center-y="3.4059522"
+     transform="matrix(-2.1619794,0,-0.02220951,-1,-163.29324,136)" />
+  <g
+     id="g4143"
+     transform="matrix(1.0824742,0,0,1.1432836,-6.288663,-3.185065)">
+    <rect
+       y="322.33331"
+       x="246"
+       height="39.851299"
+       width="46.190475"
+       id="rect4129"
+       style="fill:#ffffff;stroke-width:1.28200126" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.28200126"
+       id="rect4131"
+       width="46.190475"
+       height="39.851299"
+       x="296.80951"
+       y="322.33331" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.28200126"
+       id="rect4135"
+       width="46.190475"
+       height="39.851299"
+       x="246"
+       y="366.23203" />
+    <rect
+       y="366.23203"
+       x="296.80951"
+       height="39.851299"
+       width="46.190475"
+       id="rect4137"
+       style="fill:#ffffff;stroke-width:1.28200126" />
+  </g>
+  <path
+     style="fill:#000000;stroke-width:0.69430506"
+     d="M 471.37891 92.710938 L 471.37891 139.66211 L 471.3418 139.66211 L 471.37891 139.69141 L 471.37891 139.71094 L 471.40234 139.71094 L 503.89453 165.67578 L 536.4043 191.72461 L 536.34766 165.70117 L 536.37891 139.71094 L 503.88281 139.7207 L 498.45898 139.71094 L 536.37891 139.71094 L 536.37891 92.710938 L 471.37891 92.710938 z "
+     id="path4151" />
+</svg>
