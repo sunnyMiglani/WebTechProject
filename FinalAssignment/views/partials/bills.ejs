@@ -4,11 +4,12 @@
 <p align="center"> Bills </p>
 <% for(var i=0; i < bills.length; i++) { %>
     <div class="shopItem">
-            <li> <%= bills[i].paydate %>: <%= bills[i].amount %> </li>
+            <li> <%= bills[i].paydate %>: £<%= bills[i].amount %> : <%= bills[i].reference </li>
     </div>
 <% } %>
 <form action="/addBill" method="POST">
     <input id="amount" type="number" min="1" step="any" placeholder="New Bill Payment" name="amount" required>
+    <input id="ref" type="text" placeholder="Payment Reference" name="reference" required>
     <input id="date" type="date" placeholder="Payment Date" name="date" required>
     <button type="submit" id="addItemButton" value="Submit">Add</button>
 </form>

@@ -43,7 +43,7 @@ class sqlDB {
             //Add global house position if not set already
             db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', ['Global']);
             //Bills table
-            db.run('CREATE TABLE IF NOT EXISTS Bills(HouseID INTEGER NOT NULL, PayDate DATE NOT NULL, Amount INTEGER NOT NULL,\
+            db.run('CREATE TABLE IF NOT EXISTS Bills(HouseID INTEGER NOT NULL, PayDate DATE NOT NULL, Amount INTEGER NOT NULL, Reference TEXT NOT NULL\
                 FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
         });
         this.closeDB(db);
@@ -210,9 +210,9 @@ class sqlDB {
 
     //////////////////////////////// Bills ///////////////////////////////////////////////////////
 
-    addBillToHouse(houseID, date, amount, callback) {
+    addBillToHouse(houseID, date, amount, reference, callback) {
         var db = this.openDB();
-        db.run('INSERT INTO Bills(HouseID, Paydate, Amount) VALUES(?, ?, ?)', [houseID, date, amount], function(err) {
+        db.run('INSERT INTO Bills(HouseID, Paydate, Amount, Reference) VALUES(?, ?, ?, ?)', [houseID, date, amount, reference], function(err) {
             if(err) {
                 console.log(err.message);
             }
@@ -227,7 +227,7 @@ class sqlDB {
 
     getBillsForHouse(houseID, callback) {
         var db = this.openDB();
-        var sqlQuery = 'SELECT PayDate paydate, Amount amount FROM Bills WHERE HouseID = ?';
+        var sqlQuery = 'SELECT PayDate paydate, Amount amount, Reference reference FROM Bills WHERE HouseID = ?';
         this.generalQueryHelper(db, sqlQuery, houseID, callback);
         this.closeDB(db);
     }

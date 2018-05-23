@@ -240,8 +240,9 @@ module.exports = function(app, db, hashPass) {
         var date = req.body.date;
         var amount = req.body.amount;
         var email = req.session.user.email;
+        var reference = req.body.reference;
         db.getUserData(email, false, function(returnedRow) {
-            db.addBillToHouse(returnedRow[0].houseID, date, amount, function() {
+            db.addBillToHouse(returnedRow[0].houseID, date, amount, reference, function() {
                 res.redirect('/dashboard');
             });
         });
