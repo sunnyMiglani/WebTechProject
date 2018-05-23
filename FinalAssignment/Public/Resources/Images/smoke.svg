@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="163mm"
+   height="100mm"
+   viewBox="0 0 163 100"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (3ce5693, 2018-03-11)"
+   sodipodi:docname="smoke.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="1020.7742"
+     inkscape:cy="387.89675"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1033"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-197)">
+    <g
+       id="g51"
+       transform="matrix(1.2399492,0,0,1.23338,-7.4515949,135.96321)"
+       style="opacity:0.7">
+      <g
+         id="g38">
+        <ellipse
+           style="fill:#000000;stroke-width:0.26458332"
+           id="path12"
+           cx="37.230652"
+           cy="92.32589"
+           rx="27.78125"
+           ry="22.489584" />
+        <g
+           id="g29">
+          <ellipse
+             ry="26.647322"
+             rx="29.671131"
+             cy="86.65625"
+             cx="73.516373"
+             id="path14"
+             style="fill:#000000;stroke-width:0.26458332" />
+          <ellipse
+             ry="13.418155"
+             rx="22.678572"
+             cy="115.38244"
+             cx="58.964287"
+             id="path16"
+             style="fill:#000000;stroke-width:0.26458332" />
+          <ellipse
+             ry="19.087799"
+             rx="27.970238"
+             cy="71.159218"
+             cx="65.011902"
+             id="path18"
+             style="fill:#000000;stroke-width:0.26458332" />
+          <ellipse
+             ry="18.520834"
+             rx="29.104166"
+             cy="84.199409"
+             cx="106.2113"
+             id="path20"
+             style="fill:#000000;stroke-width:0.26458332" />
+          <ellipse
+             ry="17.008928"
+             rx="27.78125"
+             cy="104.23214"
+             cx="92.037201"
+             id="path22"
+             style="fill:#000000;stroke-width:0.26458332" />
+        </g>
+      </g>
+      <path
+         transform="scale(0.26458333)"
+         inkscape:connector-curvature="0"
+         id="path40"
+         d="m 193.66161,482.98985 c -30.56663,-6.63389 -52.31172,-23.80801 -55.66866,-43.9667 -0.96185,-5.77596 -1.25121,-6.07143 -5.94571,-6.07143 -7.31065,0 -25.50107,-4.03108 -35.967097,-7.97048 C 77.17668,417.86599 59.212694,404.10584 49.26838,389.12409 14.077978,336.1075 55.926516,272.04411 130.28921,265.0942 l 10.91331,-1.01995 0.90816,-5.67933 c 3.00583,-18.79742 23.84308,-40.16683 49.22223,-50.4793 17.744,-7.21003 31.98497,-9.76226 54.47155,-9.76226 16.39578,0 23.31043,0.64116 33.167,3.07545 29.60473,7.31148 51.68679,21.35454 63.3875,40.31122 2.75608,4.46517 6.79523,9.43761 8.97592,11.04986 3.74456,2.76847 4.39566,2.81745 11.71723,0.88139 4.2638,-1.12748 14.66307,-2.78918 23.1095,-3.69266 40.43597,-4.32528 83.1473,8.13662 106.15874,30.97398 14.05561,13.94928 17.05554,20.61793 17.05554,37.91341 0,12.39458 -0.37163,14.24744 -4.28571,21.36721 -8.14094,14.80852 -26.77696,29.71924 -46.54336,37.23944 l -7.97193,3.03295 0.6568,11.34588 c 0.60915,10.52272 0.32995,12.00982 -3.84823,20.49692 -10.4566,21.24035 -37.26027,37.03827 -72.9731,43.00988 -17.15995,2.86935 -47.62915,2.182 -62.08927,-1.40067 -8.28873,-2.05363 -8.53284,-2.02963 -10.63938,1.04612 -7.38015,10.77565 -26.98216,22.49808 -45.87725,27.43558 -14.68981,3.83862 -46.16265,4.21873 -62.14285,0.75053 z"
+         style="fill:#808080;stroke-width:1.42857146" />
+    </g>
+  </g>
+</svg>

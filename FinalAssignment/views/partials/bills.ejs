@@ -4,7 +4,7 @@
 <p align="center"> Bills </p>
 <% for(var i=0; i < bills.length; i++) { %>
     <div class="shopItem">
-            <li> <%= bills[i].paydate %>: £<%= bills[i].amount %> : <%= bills[i].reference </li>
+            <li> <%= bills[i].paydate %>: £<%= bills[i].amount %> : <%= bills[i].reference %> </li>
     </div>
 <% } %>
 <form action="/addBill" method="POST">

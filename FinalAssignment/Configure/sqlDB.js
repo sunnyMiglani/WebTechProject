@@ -43,7 +43,7 @@ class sqlDB {
             //Add global house position if not set already
             db.run('INSERT OR IGNORE INTO HouseGroups(HouseName) VALUES(?)', ['Global']);
             //Bills table
-            db.run('CREATE TABLE IF NOT EXISTS Bills(HouseID INTEGER NOT NULL, PayDate DATE NOT NULL, Amount INTEGER NOT NULL, Reference TEXT NOT NULL\
+            db.run('CREATE TABLE IF NOT EXISTS Bills(HouseID INTEGER NOT NULL, PayDate DATE NOT NULL, Amount INTEGER NOT NULL, Reference TEXT NOT NULL,\
                 FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
         });
         this.closeDB(db);
