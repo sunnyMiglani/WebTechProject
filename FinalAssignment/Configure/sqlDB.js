@@ -188,17 +188,22 @@ class sqlDB {
     deleteItemFromShoppingList(houseID, item, callback) {
         var db = this.openDB();
         var sqlQuery = 'SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?';
+        item = item.split(":");
+        item[0] = item[0].replace( /\s/g, ""); 
+        item[1] = item[1].replace( /\s/g, "");
         this.generalQueryHelper(db, sqlQuery, houseID, function(rows) {
-            var currentList = JSON.parse(row[0].sl);
+            var currentList = JSON.parse(rows[0].sl);
             for(var i = 0; i < currentList.length; i++) {
                 if(currentList[i][0] === item[0] && currentList[i][1] === item[1]) {
                     currentList.splice(i,1);
                     break;
                 }
             }
-            if(callback) {
-                callback();
-            }
+            db.run('UPDATE Shopping SET ShoppingList = ? WHERE HouseID = ?', [JSON.stringify(currentList), houseID], function(err) {
+                if(callback) {
+                    callback();
+                }
+            });
         });
         this.closeDB(db);
     }

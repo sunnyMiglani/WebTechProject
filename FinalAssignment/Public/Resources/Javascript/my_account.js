@@ -31,7 +31,7 @@ function getUserData(xmlhttp){
             console.log("in user data!");
             console.log(userData);
             userData = JSON.parse(userData);
-            showUserData(userData);
+            showUserData(userData[0]);
         }
     }
     xmlhttp.open("GET", '/myaccountinfo', true);

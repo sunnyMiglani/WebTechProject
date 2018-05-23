@@ -224,6 +224,7 @@ module.exports = function(app, db, hashPass) {
 
     app.delete('/deleteShoppingItem', function(req, res) {
         var item = req.body.item;
+        console.log("item = " + item);
         var email = req.session.user.email;
         db.getUserData(email, false, function(returnedRow) {
             db.deleteItemFromShoppingList(returnedRow[0].houseID, item, function() {

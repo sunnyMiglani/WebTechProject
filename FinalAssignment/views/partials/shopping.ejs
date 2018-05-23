@@ -7,6 +7,7 @@
     <% for(var i=0; i < shopping.length; i++) { %>
         <div class="shopItem">
                 <li> <%= shopping[i][0] %>: <%= shopping[i][1] %> </li>
+                <button type="delete" id="deleteItemButton" onclick="deleteItemFunc(this)">bin</button>
         </div>  
     <% } %>
     <form action="/addItem" method="POST">
