@@ -45,8 +45,10 @@ module.exports = function(app, db, hashPass) {
         res.render('home', JSONForVariables(req, 1));
     });
 
-    app.get('/about', function (req, res) {  
-        res.render('about',JSONForVariables(req,2));
+    app.get('/about', function (req, res) { 
+        var jsonObj = JSONForVariables(req, 2);
+        jsonObj.activeField = ['inactive', 'active'];
+        res.render('about', jsonObj);
     });
 
     app.get('/dashboard', function(req, res) {
