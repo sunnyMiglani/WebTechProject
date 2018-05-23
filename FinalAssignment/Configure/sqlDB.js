@@ -45,6 +45,9 @@ class sqlDB {
             //Bills table
             db.run('CREATE TABLE IF NOT EXISTS Bills(HouseID INTEGER NOT NULL, PayDate DATE NOT NULL, Amount INTEGER NOT NULL, Reference TEXT NOT NULL,\
                 FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
+            db.run('CREATE TABLE IF NOT EXISTS Messages(HouseID INTEGER NOT NULL, Fname TEXT NOT NULL, Message TEXT NOT NULL,\
+                FOREIGN KEY (HouseID) REFERENCES HouseGroups(GroupID))');
+            
         });
         this.closeDB(db);
     }
@@ -188,9 +191,12 @@ class sqlDB {
     deleteItemFromShoppingList(houseID, item, callback) {
         var db = this.openDB();
         var sqlQuery = 'SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?';
-        item = item.split(":");
+        console.log(item);
+        item = item.split(": ");
+        console.log(item);
         item[0] = item[0].replace( /\s/g, ""); 
-        item[1] = item[1].replace( /\s/g, "");
+        item[1] = item[1].substring(0, item[1].length - 1);
+        //item[1] = item[1].replace( /\s/g, "");
         this.generalQueryHelper(db, sqlQuery, houseID, function(rows) {
             var currentList = JSON.parse(rows[0].sl);
             for(var i = 0; i < currentList.length; i++) {
@@ -231,6 +237,31 @@ class sqlDB {
         this.generalQueryHelper(db, sqlQuery, houseID, callback);
         this.closeDB(db);
     }
+
+    //////////////////////////////// messages ///////////////////////////////////////////////////////
+
+    addMessageToHouse(houseID, fname, message, callback) {
+        var db = this.openDB();
+        db.run('INSERT INTO Bills(HouseID, Fname, Message) VALUES(?, ?, ?)', [houseID, fname, message], function(err) {
+            if(err) {
+                console.log(err.message);
+            }
+            else {
+                if(callback) {
+                    callback();
+                }
+            }
+        });
+        this.closeDB(db);
+    }
+
+    getMessagesForHouse(houseID, callback) {
+        var db = this.openDB();
+        var sqlQuery = 'SELECT Fname fname, Message message, FROM Bills WHERE HouseID = ?';
+        this.generalQueryHelper(db, sqlQuery, houseID, callback);
+        this.closeDB(db);
+    }
+
 
     //////////////////////////////// Helper functions ///////////////////////////////////////////
 
