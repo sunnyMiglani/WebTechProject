@@ -294,8 +294,8 @@ module.exports = function(app, db, hashPass) {
                             normalJSON.messages = messages;
                             normalJSON.bills = bills
                             res.render('dashboard', normalJSON);
-                        })
-                    })
+                        });
+                    });
                 });
             });
         }); 

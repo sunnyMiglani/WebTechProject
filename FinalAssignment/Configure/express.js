@@ -25,9 +25,6 @@ module.exports = function(db) {
         resave: false,
         saveUninitialized: false,
         cookie: {
-            //Without expires. client should delete cookie when closing web browser
-            // /expires: 10000,
-            //TODO: change this if we have https working
             secure: true
         }
     }));
