@@ -1,0 +1,16 @@
+<!-- views/partials/messages.ejs  -->
+
+
+<div class="shoppingListBackground">
+
+    <p align="center"> Messages </p>
+    <% for(var i=0; i < messages.length; i++) { %>
+        <div class="Message">
+                <li> <%= messages[i].fname %>: <%= messages[i].messages %> </li>
+        </div>  
+    <% } %>
+    <form action="/addMessage" method="POST">
+        <input type="text" placeholder="" name="message" required>
+        <button type="submit" id="addMessageButton" value="Submit">Add</button>
+    </form>
+</div>

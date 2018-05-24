@@ -56,33 +56,16 @@ module.exports = function(app, db, hashPass) {
             console.log("Dashboard: Is a session user");
             var email = req.session.user.email;
             db.getUserData(email, false, function(returnedRow) {
-                //if user does not belong to a house
+                
                 var jsonObj = JSONForVariables(req, 1);
                 jsonObj.cssFiles =['join_house.css'];
                 jsonObj.dashView = ['partials/join_house.ejs'];
+                //if user does not belong to a house
                 if(returnedRow[0].houseID === 1) {
                     res.render('dashboard', jsonObj);
                 }
                 else {
-                    //get shopping data
-                    db.getHouseIDFromUser(email, function(row) {
-                        var hid = row[0].houseID;
-                        db.getShoppingListByHouseID(hid, function(sList) {
-                            getFlatmates(email, function(houseMembers) {
-                                db.getBillsForHouse(hid, function(bills) {
-                                    console.log(JSON.stringify(bills));
-                                    var normalJSON = JSONForVariables(req, 1); 
-                                    normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs', 'partials/bills.ejs'];
-                                    normalJSON.cssFiles = ["shopping.css", "house_members.css", "bills.css"];
-                                    normalJSON.javaScriptFiles = ["shopping.js"];
-                                    normalJSON.shopping = JSON.parse(sList[0].sl);
-                                    normalJSON.houseMembers = houseMembers;
-                                    normalJSON.bills = bills
-                                    res.render('dashboard', normalJSON);
-                                })
-                            });
-                        });
-                    }); 
+                    getHouseItemsAndSend(req, res, email);
                 }
             });
         } 
@@ -263,6 +246,20 @@ module.exports = function(app, db, hashPass) {
         });
     });
 
+    ////// Messages
+
+    app.post('/addMessage', function(req, res) {
+        var message = req.body.message;
+        console.log("incoming message " + message);
+        var email = req.session.user.email;
+        db.getUserData(email, false, function(returnedRow) {
+            db.addMessageToHouse(returnedRow[0].houseID, returnedRow[0].fname, message, function() {
+                res.redirect('/dashboard');
+            });
+        });
+    });
+
+
     app.get('/logout', function(req,res) {
             if (req.session.user && req.cookies.user_sid) {
                 console.log("Tried to Logout!! ");
@@ -280,6 +277,29 @@ module.exports = function(app, db, hashPass) {
         });   
     }
 
+    function getHouseItemsAndSend(req, res, email) {
+        db.getHouseIDFromUser(email, function(row) {
+            var hid = row[0].houseID;
+            db.getShoppingListByHouseID(hid, function(sList) {
+                getFlatmates(email, function(houseMembers) {
+                    db.getBillsForHouse(hid, function(bills) {
+                        db.getMessagesForHouse(hid, function(messages) {
+                            console.log(JSON.stringify(bills));
+                            var normalJSON = JSONForVariables(req, 1); 
+                            normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs', 'partials/bills.ejs', 'partials/messages.ejs'];
+                            normalJSON.cssFiles = ["shopping.css", "house_members.css","bills.css"];
+                            normalJSON.javaScriptFiles = ["shopping.js"];
+                            normalJSON.shopping = JSON.parse(sList[0].sl);
+                            normalJSON.houseMembers = houseMembers;
+                            normalJSON.messages = messages;
+                            normalJSON.bills = bills
+                            res.render('dashboard', normalJSON);
+                        })
+                    })
+                });
+            });
+        }); 
+    }
 
     function JSONForVariables(req, pageID){
         var jsonObj = {};
