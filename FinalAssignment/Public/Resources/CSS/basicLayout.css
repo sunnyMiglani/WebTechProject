@@ -91,10 +91,12 @@ input{
     box-sizing: border-box;
 }
 
-.dashboardContainer::after{
-    box-sizing: border-box;
-    content: "";
-    display: table;
-    clear: both;
-    align-self: center;
+.dashboardContainer{
+    margin-top: 40px;
+    width: 100%;
+
+}
+
+.dashboardContainer td{
+    padding: 5px;
 }
