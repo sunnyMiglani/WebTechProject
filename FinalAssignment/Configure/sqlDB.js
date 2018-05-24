@@ -242,7 +242,7 @@ class sqlDB {
 
     addMessageToHouse(houseID, fname, message, callback) {
         var db = this.openDB();
-        db.run('INSERT INTO Bills(HouseID, Fname, Message) VALUES(?, ?, ?)', [houseID, fname, message], function(err) {
+        db.run('INSERT INTO Messages(HouseID, Fname, Message) VALUES(?, ?, ?)', [houseID, fname, message], function(err) {
             if(err) {
                 console.log(err.message);
             }
@@ -257,7 +257,7 @@ class sqlDB {
 
     getMessagesForHouse(houseID, callback) {
         var db = this.openDB();
-        var sqlQuery = 'SELECT Fname fname, Message message, FROM Bills WHERE HouseID = ?';
+        var sqlQuery = 'SELECT Fname fname, Message messages FROM Messages WHERE HouseID = ?';
         this.generalQueryHelper(db, sqlQuery, houseID, callback);
         this.closeDB(db);
     }
