@@ -9,7 +9,8 @@
 
 div.messageContainer {
     height: 300px;
-    overflow: scroll;
+    width:500px;
+    word-wrap: break-word;
 }
 
 div.billItem {

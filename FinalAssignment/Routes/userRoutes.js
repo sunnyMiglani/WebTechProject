@@ -156,7 +156,7 @@ module.exports = function(app, db, hashPass) {
             var psw = req.body.psw;
             //get user data: true to return password
             db.getUserData(email, true, function(returnedRow) {
-                if(returnedRow === undefined) {
+                if(returnedRow[0] === undefined) {
                     console.log("User not found");
                     res.redirect('/');
                 }

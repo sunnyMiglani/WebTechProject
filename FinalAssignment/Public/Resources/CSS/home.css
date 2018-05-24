@@ -8,7 +8,7 @@ h1 {
 }
 
 form {
-    border: 3px solid;
+    border: 0px solid;
     border-color: #264653;
     border-radius: 6px;
 }
@@ -18,14 +18,14 @@ section.left,section.right
 {
     width:44%;
     text-align: justify;
-    background-color: #264653;
+    background-color: rgba(0, 51, 94, 0.829);
     border-radius: 6px;
 }
 
 
 .loginContainer {
     margin-top: 8%;    
-    background-color: #264653;
+    background-color: rgba(0, 51, 94, 0.829);
     border-radius: 6px;
     
 }
@@ -126,7 +126,7 @@ div {
 /* Requirements for the password */
 #requirements {
     display:none;
-    background: #264653;
+    background: rgba(0, 52, 94, 0);
     color: rgb(252, 252, 252);
     position: relative;
     padding: 20px;

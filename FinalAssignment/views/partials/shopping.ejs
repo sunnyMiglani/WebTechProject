@@ -5,10 +5,10 @@
     <div class="shopItemContainer">
     <p align="center"> Shopping List </p>
     <% for(var i=0; i < shopping.length; i++) { %>
-        <div class="shopItem">
-                <li> <%= shopping[i][0] %>: <%= shopping[i][1] %> </li>
-                <button type="delete" id="deleteItemButton" onclick="deleteItemFunc(this)">bin</button>
-        </div>  
+        <ul class="shopItem">
+                <li> <%= shopping[i][0] %>: <%= shopping[i][1] %>
+                <button type="delete" class="deleteItemButton" onclick="deleteItemFunc(this)"> <span class="trashIcon"></span> </button> </li>
+        </ul>  
     <% } %>
     </div>
     <form action="/addItem" method="POST">

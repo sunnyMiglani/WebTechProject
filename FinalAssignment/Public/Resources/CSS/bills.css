@@ -1,27 +1,28 @@
 .billsBackground{
-    background-color:  rgb(250, 250, 186);
+    background-color:  rgb(212, 248, 248);
     margin: auto;
     color: #264653;
     border-radius: 12px;
     font-size: larger;
-    width:auto;
     padding: 5px;
+    width: auto;
 }
 
 div.billItemContainer {
     height: 300px;
     overflow: scroll;
+    width:inherit;
+    word-wrap: break-word;
 }
 
 div.billItem {
     padding: 1%;
-    /* background-color: beige; */
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     width: auto;
     border-bottom: 2px black solid;
 }
 
 form {
+    width: inherit;
     border: 0px;
     padding: auto;
     align-content: center;
