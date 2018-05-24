@@ -6,8 +6,10 @@
     <p align="center"> Shopping List </p>
     <% for(var i=0; i < shopping.length; i++) { %>
         <ul class="shopItem">
-                <li> <%= shopping[i][0] %>: <%= shopping[i][1] %>
-                <button type="delete" class="deleteItemButton" onclick="deleteItemFunc(this)"> <span class="trashIcon"></span> </button> </li>
+                <li>
+                    <div> <%= shopping[i][0] %>: <%= shopping[i][1] %></div>
+                    <button type="delete" class="deleteItemButton" onclick="deleteItemFunc(this)"> <span class="trashIcon"></span> </button> 
+                </li>
         </ul>  
     <% } %>
     </div>
