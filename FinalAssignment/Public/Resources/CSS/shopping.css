@@ -7,11 +7,9 @@
     border-radius: 12px;
     font-size: larger;
     margin-bottom: 100px;
-
-
-    float: left;
-    width: 33.33%;
+    width: 20%;
     padding: 10px;
+    justify-self: right;
 
 }
 

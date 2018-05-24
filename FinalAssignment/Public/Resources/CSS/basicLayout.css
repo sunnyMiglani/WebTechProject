@@ -90,3 +90,11 @@ input{
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+
+.dashboardContainer::after{
+    box-sizing: border-box;
+    content: "";
+    display: table;
+    clear: both;
+    align-self: center;
+}

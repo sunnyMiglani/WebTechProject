@@ -20,11 +20,14 @@
 
     </head>
     <body>
-        <%- include('partials/navbar.ejs') %>
+    <%- include('partials/navbar.ejs') %>
+    <div class="dashboardContainer">
         <% for(var i=0; i < dashView.length; i++) { %>
             <%- include(dashView[i]) %>
         <% } %>
+        </div>
     </body>
+
 
     <footer>
         <%- include('partials/footer.ejs') %>

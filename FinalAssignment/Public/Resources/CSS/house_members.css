@@ -1,13 +1,12 @@
 .houseMembersBackground{
     background-color:  rgb(186, 242, 250);
     color: #264653;
-    width: auto;
+    width: 20%;
     padding: 10px;
-    float: left;
     margin-top: 10%;
     border-radius: 12px;
+    margin-bottom: 100px;    
     font-size: x-large;
-
-
+    justify-self: left;
 }
 
