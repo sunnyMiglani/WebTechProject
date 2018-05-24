@@ -1,9 +1,9 @@
 .houseMembersBackground{
     background-color:  rgb(186, 242, 250);
-    float: left;
     color: #264653;
     width: auto;
     padding: 10px;
+    float: left;
     margin-top: 10%;
     border-radius: 12px;
     font-size: x-large;
