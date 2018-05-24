@@ -287,7 +287,7 @@ module.exports = function(app, db, hashPass) {
                             console.log(JSON.stringify(bills));
                             var normalJSON = JSONForVariables(req, 1); 
                             normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs', 'partials/bills.ejs', 'partials/messages.ejs'];
-                            normalJSON.cssFiles = ["shopping.css", "house_members.css","bills.css"];
+                            normalJSON.cssFiles = ["shopping.css", "house_members.css","bills.css","messages.css"];
                             normalJSON.javaScriptFiles = ["shopping.js"];
                             normalJSON.shopping = JSON.parse(sList[0].sl);
                             normalJSON.houseMembers = houseMembers;
