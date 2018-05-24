@@ -156,7 +156,7 @@ module.exports = function(app, db, hashPass) {
             var psw = req.body.psw;
             //get user data: true to return password
             db.getUserData(email, true, function(returnedRow) {
-                if(returnedRow === undefined) {
+                if(returnedRow[0] === undefined) {
                     console.log("User not found");
                     res.redirect('/');
                 }
@@ -286,8 +286,8 @@ module.exports = function(app, db, hashPass) {
                         db.getMessagesForHouse(hid, function(messages) {
                             console.log(JSON.stringify(bills));
                             var normalJSON = JSONForVariables(req, 1); 
-                            normalJSON.dashView = ['partials/shopping.ejs', 'partials/house_members.ejs', 'partials/bills.ejs', 'partials/messages.ejs'];
-                            normalJSON.cssFiles = ["shopping.css", "house_members.css","bills.css"];
+                            normalJSON.dashView = ['partials/house_members.ejs','partials/messages.ejs', 'partials/bills.ejs', 'partials/shopping.ejs'];
+                            normalJSON.cssFiles = ["shopping.css", "house_members.css","bills.css","messages.css"];
                             normalJSON.javaScriptFiles = ["shopping.js"];
                             normalJSON.shopping = JSON.parse(sList[0].sl);
                             normalJSON.houseMembers = houseMembers;

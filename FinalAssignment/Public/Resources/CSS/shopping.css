@@ -1,26 +1,21 @@
 .shoppingListBackground{
     background-color:  rgb(250, 250, 186);
     margin: auto;
-    float: right;
     color: #264653;
-    width: auto;
-    padding: 10px;
-    margin-top: 10%;
-    padding-bottom: 2%;
     border-radius: 12px;
     font-size: larger;
-    margin-bottom: 100px;
+    padding: 5px;
+    width: auto;
 }
 
 div.shopItemContainer {
     height: 500px;
+    word-wrap: break-word;
     overflow: scroll;
 }
 
-div.shopItem {
+.shopItem {
     padding: 1%;
-    /* background-color: beige; */
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     width: auto;
     border-bottom: 2px black solid;
 }
@@ -30,4 +25,27 @@ form {
     padding: auto;
     align-content: center;
     box-sizing: border-box;
+}
+
+p{
+    margin-top: 0px;
+}
+
+.trashIcon{
+    background-image: url('trash.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+.deleteItemButton{
+    float: right;
+    background-color: transparent;
+    width: 22px;
+    height: 22px;
+    word-wrap: none;
+    padding: 2px;
+    margin: 5px;
 }
