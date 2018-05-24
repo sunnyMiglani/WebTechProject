@@ -246,6 +246,20 @@ module.exports = function(app, db, hashPass) {
         });
     });
 
+    ////// Messages
+
+    app.post('/addMessage', function(req, res) {
+        var message = req.body.message;
+        console.log("incoming message " + message);
+        var email = req.session.user.email;
+        db.getUserData(email, false, function(returnedRow) {
+            db.addMessageToHouse(returnedRow[0].houseID, returnedRow[0].fname, message, function() {
+                res.redirect('/dashboard');
+            });
+        });
+    });
+
+
     app.get('/logout', function(req,res) {
             if (req.session.user && req.cookies.user_sid) {
                 console.log("Tried to Logout!! ");
@@ -277,6 +291,8 @@ module.exports = function(app, db, hashPass) {
                             normalJSON.javaScriptFiles = ["shopping.js"];
                             normalJSON.shopping = JSON.parse(sList[0].sl);
                             normalJSON.houseMembers = houseMembers;
+                            console.log("messages = " + messages[0].message);
+                            normalJSON.messages = messages;
                             normalJSON.bills = bills
                             res.render('dashboard', normalJSON);
                         })
