@@ -9,16 +9,12 @@
     padding-bottom: 2%;
     border-radius: 12px;
     font-size: larger;
+    margin-bottom: 100px;
 }
 
 div.shopItemContainer {
-    margin: 2%;
-    padding: 1%;
-    border: 2px;
-    border-radius: 25px;
-    background-color: beige;
-    width:30%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 500px;
+    overflow: scroll;
 }
 
 div.shopItem {

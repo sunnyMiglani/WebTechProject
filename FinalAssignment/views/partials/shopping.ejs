@@ -2,7 +2,7 @@
 
 
 <div class="shoppingListBackground">
-
+    <div class="shopItemContainer">
     <p align="center"> Shopping List </p>
     <% for(var i=0; i < shopping.length; i++) { %>
         <div class="shopItem">
@@ -10,6 +10,7 @@
                 <button type="delete" id="deleteItemButton" onclick="deleteItemFunc(this)">bin</button>
         </div>  
     <% } %>
+    </div>
     <form action="/addItem" method="POST">
         <input type="text" placeholder="Item needed" name="item" required>
         <button type="submit" id="addItemButton" value="Submit">Add</button>
