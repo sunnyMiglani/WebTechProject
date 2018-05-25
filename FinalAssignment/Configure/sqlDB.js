@@ -191,13 +191,9 @@ class sqlDB {
     deleteItemFromShoppingList(houseID, item, callback) {
         var db = this.openDB();
         var sqlQuery = 'SELECT ShoppingList sl FROM Shopping WHERE HouseID = ?';
-        console.log(item);
         item = item.split(": ");
-        console.log("Item = " + item);
-        item[0] = item[0].replace( /\s/g, ""); 
-        console.log("Item = " + item);
-        console.log("Item = " + item[0]);
-        console.log("Item = " + item[1]);
+        item[0] = item[0].replace( /\s/g, "");
+        item[1] = item[1].substring(0, item[1].length - 1);
         //item[1] = item[1].replace( /\s/g, "");
         this.generalQueryHelper(db, sqlQuery, houseID, function(rows) {
             var currentList = JSON.parse(rows[0].sl);
