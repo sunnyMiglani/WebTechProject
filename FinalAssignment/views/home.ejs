@@ -14,25 +14,19 @@
 <body>
 
     <%- include('partials/navbar.ejs') %>
-    <section class="loginContainer">
-        <section class="container left">
+    <div class="loginContainer">
+        <section class="container left"> <h2> Login to existing account </h2>
             <form action="/signin" method="POST">
-                <label for="uname">
                     <b>Email</b>
-                </label>
                 <input type="text" placeholder="Enter Email" name="uname" required>
 
-                <label for="psw">
                     <b>Password</b>
-                </label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
 
                 <button type="submit" value="Submit">Login</button>
-                <label>
                     <input type="checkbox" checked="checked" name="remember">
                     <b>Remember me</b>
-                </label>
                 <div class="container">
                     <span class="psw">
                         <b>
@@ -43,36 +37,26 @@
             </form>
         </section>
 
-        <section class="container right">
+        <section class="container right"> <h2> Register a new account </h2>
             <form action="/signup" method="POST">
                 <div class="realNames">
                     <div class="fname">
-                        <label for="fname">
                             <b>First Name</b>
-                        </label>
                         <input type="text" placeholder="Enter First name" name="fname" required>
                     </div>
                     <div class="lname">
-                        <label for="lname">
                             <b>Last Name</b>
-                        </label>
                         <input type="text" placeholder="Enter First name" name="lname" required>
                     </div>
                 </div>
-                <label for="email">
                     <b>Email</b>
-                </label>
                 <input type="text" id="emailEnter" placeholder="Enter Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9\-.]+.[a-z{2,}]"
                     required>
 
-                <label for="psw">
                     <b>Password</b>
-                </label>
                 <input type="password" id="regPsw" placeholder="Enter Password" name="psw" pattern="(?=.*\d).{8,}" required>
                 <div>
-                    <label for="repsw">
                         <b>Re-enter Password</b>
-                    </label>
                     <input type="password" id="regPswTwo" placeholder="Enter Password" name="repsw" required>
                 </div>
 
@@ -90,7 +74,7 @@
                 </div>
             </form>
         </section>
-    </section>
+    </div>
 </body>
 
 <footer>

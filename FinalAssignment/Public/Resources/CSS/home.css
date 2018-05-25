@@ -123,6 +123,11 @@ div {
     width: 49%;
 }
 
+h2 {
+    color: aliceblue;
+    text-align: center;
+}
+
 /* Requirements for the password */
 #requirements {
     display:none;
