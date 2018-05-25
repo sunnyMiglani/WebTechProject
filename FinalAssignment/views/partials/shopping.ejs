@@ -7,8 +7,8 @@
     <% for(var i=0; i < shopping.length; i++) { %>
         <ul class="shopItem">
                 <li>
-                    <div> <%= shopping[i][0] %>: <%= shopping[i][1] %></div>
-                    <button class="deleteItemButton" onclick="deleteItemFunc(this)"> <span class="trashIcon"></span> </button> 
+                    <button class="deleteItemButton" onclick="deleteItemFunc(this)"> <span class="trashIcon"></span> </button>
+                    <div> <%= shopping[i][0] %>: <%= shopping[i][1] %> </div>
                 </li>
         </ul>  
     <% } %>

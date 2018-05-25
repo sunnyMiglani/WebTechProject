@@ -14,7 +14,8 @@ function deleteItemFunc(button) {
 }  
 
 function delItemRequest(xmlhttp, item){
-    var shopItemString = item.children[0].children[0].innerHTML;
+    console.log(item.children[0].children[1]);
+    var shopItemString = item.children[0].children[1].innerHTML;
 
     console.log(shopItemString);
     xmlhttp.onreadystatechange = function(){
