@@ -4,11 +4,11 @@
 <div class="messagesBackground">
 <div class="messageContainer">
     <p> Notice Board </p>
+    <ul>
     <% for(var i=0; i < messages.length; i++) { %>
-        <div class="Message">
                 <li> <%= messages[i].fname %>: <%= messages[i].messages %> </li>
-        </div>  
     <% } %>
+    </ul>
 </div>
     <form action="/addMessage" method="POST">
         <input type="text" placeholder="" name="message" required>
