@@ -8,14 +8,14 @@
     width: auto;
 }
 
-div.billItemContainer {
+.billItemContainer {
     height: 300px;
     overflow: scroll;
     width:inherit;
     word-wrap: break-word;
 }
 
-div.billItem {
+.billItem {
     padding: 1%;
     width: auto;
     border-bottom: 2px black solid;
