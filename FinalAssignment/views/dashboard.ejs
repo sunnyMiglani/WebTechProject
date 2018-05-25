@@ -14,7 +14,7 @@
         <% } %> 
 
         <% for(var i=0; i < javaScriptFiles.length; i++) { %>
-        <script type="text/javascript" src= <%- javaScriptFiles[i] %> ></script>
+        <script src= <%- javaScriptFiles[i] %> ></script>
         <% } %> 
         
 
@@ -26,17 +26,18 @@
         <tbody>
             <tr>
                 <% for(var i=0; i < dashView.length; i++) { %>
-                <td valign="top">
+                <td style="vertical-align:top">
                 <%- include(dashView[i]) %>
                 </td>
             <% } %>
             </tr>
         </tbody>
     </table>
-    </body>
-
-
     <footer>
         <%- include('partials/footer.ejs') %>
     </footer>
+    </body>
+
+
+    
 </html>

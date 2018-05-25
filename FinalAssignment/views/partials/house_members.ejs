@@ -1,10 +1,8 @@
 <div class="houseMembersBackground">
-    <p align="center"> House Members </p>
+    <p> House Members </p>
     <ul>
         <% for(var i=0; i < houseMembers.length; i++) { %>
-        <div class=row>
             <li><%= houseMembers[i].fname %> <%= houseMembers[i].lname %> </li>
-        </div>  
         <% } %>
     </ul>     
 </div>

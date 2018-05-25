@@ -1,7 +1,7 @@
 
 <div class="billsBackground">
 
-<p align="center"> Bills </p>
+<p> Bills </p>
 <div class="billItemContainer">
     <% for(var i=0; i < bills.length; i++) { %>
         <div class="billItem">
@@ -12,7 +12,7 @@
 <form action="/addBill" method="POST">
     <input id="amount" type="number" min="1" step="any" placeholder="New Bill Payment" name="amount" required>
     <input id="ref" type="text" placeholder="Payment Reference" name="reference" required>
-    <input id="date" type="date" placeholder="Payment Date" name="date" required>
-    <button type="submit" id="addItemButton" value="Submit">Add</button>
+    <input id="date" type="date"  name="date" required>
+    <button type="submit" id="addItemButtonBills" value="Submit">Add</button>
 </form>
 </div>
