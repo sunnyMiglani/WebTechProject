@@ -151,7 +151,7 @@ module.exports = function(app, db, hashPass) {
         }
         //post request username and password
         else {
-            var email = req.body.uname; //TODO: change to body.email for consistency
+            var email = req.body.uname; 
             console.log(email);
             var psw = req.body.psw;
             //get user data: true to return password

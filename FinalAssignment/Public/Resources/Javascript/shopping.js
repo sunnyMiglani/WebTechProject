@@ -1,6 +1,6 @@
 function deleteItemFunc(button) {
     //get parent div
-    var shopItem = button.parentElement;
+    var shopItem = button.parentElement.parentElement;
     //request to server to delete item
     if(window.XMLHttpRequest){
         // Code for modern
@@ -14,7 +14,9 @@ function deleteItemFunc(button) {
 }  
 
 function delItemRequest(xmlhttp, item){
-    var shopItemString = item.children[0].innerHTML;
+    var shopItemString = item.children[0].children[0].innerHTML;
+
+    console.log(shopItemString);
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             console.log("Success");
